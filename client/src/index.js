@@ -3,14 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
-import InformacionForm from './Informacion.js'
 
-const Conexiones=
-    <Router>
-        <Route exact path="/" component={InformacionForm} />
-    </Router>;
-    
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
