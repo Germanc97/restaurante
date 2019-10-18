@@ -1,0 +1,22 @@
+version: "3"
+services:
+    frontend:
+        container_name: mod_restaurante
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        image: restaurante/mod_restaurante
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./client:/usr/src/app
+    backend:
+        container_name: mod_restaurante_server
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        image: restaurante/mod_restaurante_server
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./server:/usr/src/app
