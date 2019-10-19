@@ -1,5 +1,5 @@
 mongo: 
-  container_name: my-mongodb
+  container_name: dbmongo1
   image: mongo
   ports:
-    - "27017:27017"
+    - "27018:27018"
