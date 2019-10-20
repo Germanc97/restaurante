@@ -1,1 +1,2 @@
-# Desarrollo de Software a Gran Escala - Módulo Restaurante
+# Desarrollo de Software a Gran Escala
+Módulo Restaurante
