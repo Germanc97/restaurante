@@ -2,4 +2,4 @@ mongo:
   container_name: my-mongodb
   image: mongo
   ports:
-    - "27017:27017"
+    - "27018:27017"
