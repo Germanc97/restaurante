@@ -1,0 +1,42 @@
+
+.App-logo {
+  height: 90px;
+  margin-right: 10px;
+  margin-left: 20px;
+  padding-bottom: 15px;
+}
+.Menu {
+  display: flex;
+  flex-direction: row;
+  width: 82%;
+}
+.columna {
+  padding-left:50px,
+}
+.LogOut {
+  margin-Top: 20px;
+  margin-left: 20px;
+  float: right;
+  align-Content: center;
+}
+.UserInformation {
+  flex-direction: column;
+  margin-top: 18px;
+  display: flex;
+  color: white;
+  text-align: center;
+}
+.App-header {
+  background-color: #1c1d1f;
+  height: 80px;
+  display: flex;
+  box-shadow: 2px 2px 5px #999;
+  flex-direction: row;
+}
+.App-link {
+  color: #09d3ac;
+}
+.Canvas{
+  margin-left: 5em !important;
+  margin-right: 5em !important;
+}
