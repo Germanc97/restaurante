@@ -1,0 +1,46 @@
+// JSON Restuaurant Collection
+{ "_id" : 1, 
+  "name" : "Rest Prueba", 
+  "description" : "Muy lujoso", 
+  "city_id" : 1,
+  "addres" : "Cerca de aquí", 
+  "telephone" : 1234567, 
+  "email" : "rest@yopmail.com"  
+}
+
+// JSON Comments Collection
+{ "_id" :1,
+  "restaurant_id" :1,
+  "autor_id" :1,
+  "puntuation" :3, 
+  "comment" :"Muy normal"
+}
+
+// JSON Cities Collection
+{ "_id" :2,
+  "name" : "Barranquilla"}
+
+// JSON Agreement Collection
+{ "_id" :1,
+  "restaurant_id" : 1,
+  "nameAgreement" : "Tarjeta Falabella",
+  "desdiscount" : 10,
+  "cutoffDate" : "2019-12-25"
+}
+
+// JSON Decoration Collection
+{ "_id" :1,
+  "restaurant_id" : 1,
+  "type" : "Cumpleaños",
+  "description" : "Decoración de cumpleaños para mayor de edad, incluye ponqué"
+}
+
+// JSON Event Collection
+{ "_id" :1,
+  "restaurant_id" : 1,
+  "name" : "Halloween-Noche de brujas",
+  "date" : "2019-10-31",
+  "type" : "Fiesta"
+}
+
+
