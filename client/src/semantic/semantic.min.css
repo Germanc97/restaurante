@@ -23042,16 +23042,18 @@ body.dimmable>.dimmer {
 .ui.selection.dropdown {
  cursor:pointer;
  word-wrap:break-word;
+ height: 50px;
  line-height:1em;
+ padding-top: 100em;
  white-space:normal;
  outline:0;
  -webkit-transform:rotateZ(0);
  transform:rotateZ(0);
- min-width:14em;
+ min-width:12em;
  min-height:2.71428571em;
  background:#fff;
  display:inline-block;
- padding:.78571429em 2.1em .78571429em 1em;
+ padding:1.2em 2.1em .78571429em 1em;
  color:rgba(0,0,0,.87);
  -webkit-box-shadow:none;
  box-shadow:none;
@@ -23173,6 +23175,7 @@ select.ui.dropdown {
 }
 .ui.selection.visible.dropdown>.text:not(.default) {
  font-weight:400;
+ padding-top: 10em;
  color:rgba(0,0,0,.8)
 }
 .ui.selection.active.dropdown:hover {

@@ -33,10 +33,15 @@
   box-shadow: 2px 2px 5px #999;
   flex-direction: row;
 }
-.App-link {
-  color: #09d3ac;
+.horario {
+  padding-left: 17%;
+  padding-right: 17%;
+  align-self: auto;
+  align-items: center;
 }
 .Canvas{
-  margin-left: 5em !important;
-  margin-right: 5em !important;
+  height: 100%;
+  margin-left: 4em !important;
+  align-items: center;
+  margin-right: 4em !important;
 }

@@ -58,12 +58,7 @@ const semana = [
 const useStyles = makeStyles(theme => ({
   Aceptar: {
     width: 92,
-    marginLeft: 112,
-  },
-  horario: {
-    width: 125,
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
+    marginLeft: '80%',
   },
   container: {
     display: 'flex',
@@ -105,7 +100,6 @@ export default function InformacionForm() {
               <div class="row">
                   <div class="col-6 ">
                   <form class="ui form">
-                  <div className={classes.containerDays}>
                           <div class="field">
                           <label>
                           Nombre:
@@ -135,143 +129,51 @@ export default function InformacionForm() {
                           <input type="text" placeholder="Ingresa el teléfono"></input>
                           </div>
                           </div>
-                          </div>
                         </form>
                   </div>
                   <div class="col-6">
                   <form class="ui form">
-                  <div className={classes.containerDays}>
                         <div class="field">
                         <label>
                         Tipo de comida:
                         </label>
-                        <TextField
-                          id="outlined-select-currency"
-                          select
-                          label="Campo Requerido*"
-                          className={classes.textField}
-                          value={values.currency}
-                          onChange={handleChange('currency')}
-                          SelectProps={{
-                            MenuProps: {
-                              className: classes.menu,
-                            },
-                          }}
-                          helperText="Selecciona el tipo de comida"
-                          margin="normal"
-                          variant="outlined"
-                        >
-                          {currencies.map(option => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
+                        <br/>
+                        <Select placeholder='Tipo de comida' options={currencies} />
                         </div>
+                        <br/>
                         <div class="field">
                         <label>
                         Dias abierto:
                         </label>
-                        <TextField
-                          id="outlined-select-currency"
-                          select
-                          label="Campo Requerido*"
-                          className={classes.horario}
-                          value={values.currencyI}
-                          onChange={handleChange('currencyI')}
-                          SelectProps={{
-                            MenuProps: {
-                              className: classes.menu,
-                            },
-                          }}
-                          helperText="Inicio"
-                          margin="normal"
-                          variant="outlined"
-                        >
-                          {semana.map(option => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                        <TextField
-                          id="outlined-select-currency"
-                          select
-                          label="Campo Requerido*"
-                          className={classes.horario}
-                          value={values.currencyF}
-                          onChange={handleChange('currencyF')}
-                          SelectProps={{
-                            MenuProps: {
-                              className: classes.menu,
-                            },
-                          }}
-                          helperText="Fin"
-                          margin="normal"
-                          variant="outlined"
-                        >
-                          {semana.map(option => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
+                        <br/>
+                        <div class="form-check form-check-inline horario">
+                        <Select placeholder='Inicio' options={semana} />
+                        <div class="col">
+                        <Select placeholder='Fin' options={semana} />
                         </div>
+                        </div>
+                        </div>
+                        <br/>
                         <div class="field">
                         <label>
                         Horario:
                         </label>
-                        <TextField
-                          id="outlined-select-currency"
-                          select
-                          label="Campo Requerido*"
-                          className={classes.horario}
-                          value={values.timeI}
-                          onChange={handleChange('currencyI')}
-                          SelectProps={{
-                            MenuProps: {
-                              className: classes.menu,
-                            },
-                          }}
-                          helperText="Apertura"
-                          margin="normal"
-                          variant="outlined"
-                        >
-                          {semana.map(option => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                        <TextField
-                          id="outlined-select-currency"
-                          select
-                          label="Campo Requerido*"
-                          className={classes.horario}
-                          value={values.timeF}
-                          onChange={handleChange('currencyF')}
-                          SelectProps={{
-                            MenuProps: {
-                              className: classes.menu,
-                            },
-                          }}
-                          helperText="Cierre"
-                          margin="normal"
-                          variant="outlined"
-                        >
-                          {semana.map(option => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                        <Select placeholder='Tipo de comida' options={currencies} />
+                        <br/>
+                        <div class="form-check form-check-inline horario">
+                        <Select placeholder='Inicio' options={semana} />
+                        <div class="col">
+                        <Select placeholder='Fin' options={semana} />
                         </div>
-                        <div className={classes.Aceptar}><button className="ui inverted secondary button">Aceptar</button></div>
-                      </div>
+                        </div>
+                        </div>
+                        <br/>
                       </form>
                   </div>
                  </div>
+            </div>
+            <div class="form-row justify-content-end align-items-end">           
+            <button className="ui inverted secondary button">Aceptar</button>
+            <button className="ui inverted secondary button">Cancelar</button>
             </div>
             </Segment>
 );
