@@ -9,6 +9,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 //get,put and post methods of the application definition
+app.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    // Pass to next layer of middleware
+    next();
+});
+/*
+app.get('/prueba',function(req,res){
+    try{
+        "159.65.58.193:3000/edit_dinnerUserJson/1"
+    }catch(err){
+        res.json({
+            "response":1
+        });
+    }
+});*/
 app.get('/getCities',function(req,res){
     try{
         var MongoClient = require('mongodb').MongoClient;
@@ -44,7 +67,7 @@ app.get('/getRestaurant/:idRestaurant',function(req,res){
                 if (err) throw err;
                 res.json({
                     "Response":2,
-                    "Content":result[0]
+                    "Content":result
                 });
                 db.close();
             });
@@ -243,6 +266,28 @@ app.put('/putUpdateRestaurant/:idRestaurant',function(req,res){
             if (err) throw err;
             var dbo = db.db("Restaurants");
             db.close();
+            res.end({"Response":2});
+        });
+    }catch(err){
+        res.end({"Response":1});
+    }
+});
+app.post('/postImage',function(req,res){
+    var newImageData=req.body;
+    try{
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
+        MongoClient.connect(url,{ useUnifiedTopology: true }, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("Restaurants");
+            var entries = JSON.stringify({_id:1,restaurant_id: newImageData.restaurant_id,
+                name: newImageData.name,
+                url: newImageData.url
+              });
+            dbo.collection("Images").insertOne(entries,function(err,res){
+                if (err) throw err;
+                db.close();
+            });
             res.end({"Response":2});
         });
     }catch(err){
