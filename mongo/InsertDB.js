@@ -4,9 +4,10 @@ var entries = [{ _id : 1,
   name : "Rest Prueba", 
   description : "Muy lujoso", 
   city_id : 1,
-  addres : "Cerca de aquí", 
+  address : "Cerca de aquí", 
   telephone : 1234567, 
-  email : "rest@yopmail.com"  
+  email : "rest@yopmail.com",
+  schedule : "Lun-Dom 10:00AM - 12:00AM" 
 }]
 dbo.collection("Restaurant").insertMany(entries);
 // ----------------------------------------------------------------------------------------
@@ -70,3 +71,14 @@ var entries = [{_id:1,
 }]
 dbo.collection("Event").insertMany(entries);
 //----------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------
+// INSERT - COLECCIÓN 'IMAGES'
+var entries = [{restaurant_id: 1,
+  name: "Foto de noche",
+  url: "C:/Allá"
+}]
+dbo.collection("Images").insertMany(entries);
+//----------------------------------------------------------------------------------------
+El usuario-restaurante probará cargar imágenes de su propio restaurante.
