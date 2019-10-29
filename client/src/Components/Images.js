@@ -32,7 +32,7 @@ import List from './imgList.js'
       title: 'Carnesita',
      },
      {
-      _id: 5,
+      _id: 6,
       img: carne,
       title: 'Carnesita',
      },
