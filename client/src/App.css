@@ -1,22 +1,71 @@
-.App {
-  text-align: center;
-}
 
 .App-logo {
-  height: 40vmin;
+  height: 90px;
+  margin-right: 10px;
+  margin-left: 20px;
+  padding-bottom: 15px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.cardimg{
+  height: 270px;
+}
+.Menu {
   display: flex;
+  flex-direction: row;
+  width: 82%;
+}
+.columna {
+  padding-left:50px,
+}
+.LogOut {
+  margin-Top: 20px;
+  margin-left: 20px;
+  float: right;
+  align-Content: center;
+}
+.UserInformation {
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-top: 18px;
+  display: flex;
   color: white;
+  text-align: center;
+}
+.App-header {
+  background-color: #1c1d1f;
+  height: 80px;
+  display: flex;
+  box-shadow: 2px 2px 5px #999;
+  flex-direction: row;
+}
+.decorBar{
+  width: 100%;
+  height: 3px;
+  background-color: #EFB810;
+  margin-bottom: 14px !important;
+}
+.horario {
+  padding-left: 17%;
+  padding-right: 17%;
+  align-self: auto;
+  align-items: center;
+}
+.Pantalla{
+  height: 100% !important;
+}
+.Salto{
+  height: 14px;
+}
+.Barra{
+  background-color: #e0e1e2;
+  color: rgb(94, 92, 92);
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+.titulo{
+  width: 50%;
+}
+.icono{
+  width: 50%;
 }
 
-.App-link {
-  color: #09d3ac;
-}
