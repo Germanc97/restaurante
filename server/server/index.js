@@ -98,7 +98,6 @@ app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
                     });
                     db.close();
                 });
-                db.close();
             });
         });
     }catch(err){
