@@ -96,13 +96,14 @@ app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
                         "Response":2,
                         "Content":outValue
                     });
+                    db.close();
                 });
                 db.close();
             });
         });
     }catch(err){
         res.json({
-            "response":1
+            "Response":1
         });
     }
 });
