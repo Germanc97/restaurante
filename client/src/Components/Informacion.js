@@ -15,8 +15,8 @@ class InformacionForm extends Component {
     Content.map(User =>{
     return(
       <div key={User._id}>
-      <Segment>
-      <div className="container" >
+      <Segment className="PantallaNoButton">
+      <div className="container">
                 <div className="row">
                     <div className="col-6 ">
                     <form className="ui form">

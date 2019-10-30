@@ -6,7 +6,7 @@
   padding-bottom: 15px;
 }
 .cardimg{
-  height: 270px;
+  height: 210px;
 }
 .Menu {
   display: flex;
@@ -30,7 +30,7 @@
   text-align: center;
 }
 .App-header {
-  background-color: #1c1d1f;
+  background-color: #1b1c1d;
   height: 80px;
   display: flex;
   box-shadow: 2px 2px 5px #999;
@@ -48,8 +48,11 @@
   align-self: auto;
   align-items: center;
 }
-.Pantalla{
-  height: 100% !important;
+.PantallaButton{
+  height: calc(100vh - 232px)!important;
+}
+.PantallaNoButton{
+  height: calc(100vh - 182px)!important;
 }
 .Salto{
   height: 14px;
@@ -64,6 +67,7 @@
 }
 .titulo{
   width: 50%;
+  padding-left: 6%;
 }
 .icono{
   width: 50%;

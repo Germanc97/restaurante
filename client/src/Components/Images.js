@@ -31,18 +31,13 @@ import List from './imgList.js'
       img: carne,
       title: 'Carnesita',
      },
-     {
-      _id: 6,
-      img: carne,
-      title: 'Carnesita',
-     },
    ]
 }
    render(){
     
      return(
       <Card.Group itemsPerRow={5}>
-        <List Content={this.state.result}></List>
+        <List className=" d-flex align-items-center" Content={this.state.result}></List>
       </Card.Group>
      )
   }

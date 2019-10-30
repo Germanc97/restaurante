@@ -1,25 +1,24 @@
 import React from 'react';
 import '../App.css';
 import App from '../App.js'
-import CardsImg from '../Components/Images.js'
+import MesasForm from '../Components/MesasForm.js'
 import {Title} from '../Components/Title.js';
 import { Segment,Button } from 'semantic-ui-react';
-import Input from '../Components/Upload.js'
 import '../semantic/semantic.min.css'
-function galeria() {
+function Mesas() {
   return (
     <div >
         <div className="ui botton attached button">
-          <Title>Galería</Title>
+          <Title>Mesas</Title>
           <Button className='ui inverted secondary button'>
                 <i className="add icon"></i>
-                Añadir Imagen          
+                Añadir Mesa          
           </Button>
         </div>
       <Segment className="PantallaButton">
-          <CardsImg/>
+          <MesasForm/>
       </Segment>
     </div> 
   );
 }
-export default galeria;
+export default Mesas;

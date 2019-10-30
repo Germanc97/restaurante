@@ -15,7 +15,7 @@ fetch('http://181.50.100.167:5000/getRestaurant/2')
 .then(result => {
   const {Content=[]}=result
   this.setState({result : Content})
-  console.log(this.state.result);
+  //console.log(this.state.result);
 })        
 }
 
@@ -25,7 +25,6 @@ this._fetchMovie()
     render() {
     return(
       <div>
-      <App/>
       <div className="ui botton attached button"><Title>Información</Title></div> 
       <div className="Salto"/>
       <InformacionForm Content={this.state.result}></InformacionForm>

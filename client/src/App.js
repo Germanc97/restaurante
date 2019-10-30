@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
 import logo from './LogoBlanco.png';
 import './App.css';
+import PropTypes from 'prop-types'
 import { Button, Menu, Icon ,Rating } from 'semantic-ui-react';
 import {Link} from "react-router-dom";
-const ValueStars=5;
 
-function App() {
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      result: []
+    }
+  }
+  _fetchMovie(){
+  fetch('http://181.50.100.167:5000/getRestaurantPuntuation/1')
+  .then(res => res.json())
+  .then(result => {
+    const {Content=[]}=result
+    this.setState({result : Content})
+    console.log(this.state.result);
+  }) 
+  //.catch(console.log)     
+  }
+
+  componentDidMount(){
+  this._fetchMovie()
+  }
+  render(){
   return (
     <div>
       <header className="App-header">
@@ -14,19 +35,21 @@ function App() {
         <Menum/>
         <br/>
         </div>
-        <div className="UserInformation">
-          Bienvenido:
-          UserName
-          <div><Rating icon='star' defaultRating={ValueStars} maxRating={ValueStars} disabled icon='star' size='huge'/></div>
+        {this.state.result.map((data, i) => (
+        <div className="UserInformation" key={i}>
+          Bienvenido, 
+          {" "+data.name}
+          <div><Rating icon='star' defaultRating={data.puntuation} maxRating={data.puntuation} disabled icon='star' size='huge'/></div>
         </div>
+        ))}
         <div className="LogOut"><Button  secondary icon><Icon name='angle down' size='large'/></Button></div>
       </header>
       <div className="decorBar"></div>
       
     </div> 
-  );
+    );
+  }
 }
-
 export default App;
 class Menum extends Component {
   state = { activeItem: 'Información' }
@@ -71,8 +94,7 @@ class Menum extends Component {
             active={activeItem === 'Comentarios'}
             onClick={this.handleItemClick}
           />
-          <Menu.Item
-            name='Mesas'
+          <Menu.Item as={ Link } name='Mesas' to ="/Mesas"
             active={activeItem === 'Mesas'}
             onClick={this.handleItemClick}
           />
