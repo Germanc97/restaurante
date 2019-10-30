@@ -91,7 +91,7 @@ app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
                         }
                         value=value/result.length;
                     }
-                    outValue={name:restaurantName,puntuation:value};
+                    outValue=[{name:restaurantName,puntuation:value}];
                     res.json({
                         "Response":2,
                         "Content":outValue
