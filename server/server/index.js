@@ -69,6 +69,43 @@ app.get('/getRestaurant/:idRestaurant',function(req,res){
         });
     }
 });
+app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
+    var idn=req.params.idRestaurant;
+    try{
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
+        MongoClient.connect(url,{ useUnifiedTopology: true }, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("Restaurants");
+            Query={_id : parseInt(idn,10)};
+            Query2 = {projection: {name:1}};
+            dbo.collection("Restaurant").find(Query,Query2).toArray(function(err, result) {
+                if (err) throw err;
+                var restaurantName=result[0].name
+                dbo.collection("Comments").find(Query).toArray(function(err, result) {
+                    if (err) throw err;
+                    var value=0;
+                    if (result.length!=0){
+                        for (i = 0; i < result.length; i++) {
+                            value +=parseInt(result[i].puntuation,10);
+                        }
+                        value=value/result.length;
+                    }
+                    outValue={name:restaurantName,puntuation:value};
+                    res.json({
+                        "Response":2,
+                        "Content":outValue
+                    });
+                });
+                db.close();
+            });
+        });
+    }catch(err){
+        res.json({
+            "response":1
+        });
+    }
+});
 app.get('/getImagesxRestaurant/:idRestaurant',function(req,res){
     var idn=req.params.idRestaurant;
     try{
