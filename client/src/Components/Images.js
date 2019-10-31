@@ -28,15 +28,36 @@ import List from './imgList.js'
      },
      {
       _id: 4,
-      img: carne,
-      title: 'Carnesita',
+      img: pasta,
+      title: 'Pasta',
      },
+     {
+      _id: 5,
+      img: pasta,
+      title: 'Pasta',
+     },
+     {
+      _id: 6,
+      img: pizza,
+      title: 'Pizza',
+     },
+     {
+      _id: 7,
+      img: pizza,
+      title: 'Pizza',
+     },
+     {
+      _id: 8,
+      img: pasta,
+      title: 'Pasta',
+     },
+
    ]
 }
    render(){
     
      return(
-      <Card.Group itemsPerRow={5}>
+      <Card.Group centered itemsPerRow={5}>
         <List className=" d-flex align-items-center" Content={this.state.result}></List>
       </Card.Group>
      )

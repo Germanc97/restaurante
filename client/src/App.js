@@ -62,12 +62,11 @@ class Menum extends Component {
 
     return (
         <Menu inverted pointing secondary>
-          <Menu.Item  as={ Link } name='Información' to ="/"
+          <Menu.Item as={ Link } name='Información' to ="/"
             active={activeItem === 'Información'}
             onClick={this.handleItemClick}>
           </Menu.Item>
-          <Menu.Item
-            name='Reservas'
+          <Menu.Item as={ Link } name='Reservas' to ='/Reservas'
             active={activeItem === 'Reservas'}
             onClick={this.handleItemClick}
           />

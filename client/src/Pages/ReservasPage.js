@@ -1,24 +1,24 @@
-import  React, { Component } from 'react';
+import React from 'react';
 import '../App.css';
-import ListTable from '../Components/MesasForm.js'
+import App from '../App.js'
+import CardsRes from '../Components/ReservasForm.js'
 import {Title} from '../Components/Title.js';
 import { Segment,Button } from 'semantic-ui-react';
 import '../semantic/semantic.min.css'
-class Mesas extends Component {
-  render(){ 
-    return (
+function Reservas() {
+  return (
     <div >
         <div className="ui botton attached button">
-          <Title>Mesas</Title>
+          <Title>Reservas</Title>
           <Button className='ui inverted secondary button'>
                 <i className="add icon"></i>
-                Añadir Mesa          
+                Añadir Reserva          
           </Button>
-        </div>     
-          <ListTable/>
+        </div>
+      <Segment className="PantallaButton">
+          <CardsRes/>
+      </Segment>
     </div> 
   );
 }
- 
-}
-export default Mesas;
+export default Reservas;

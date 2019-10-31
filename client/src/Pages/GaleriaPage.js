@@ -1,6 +1,5 @@
 import React from 'react';
 import '../App.css';
-import App from '../App.js'
 import CardsImg from '../Components/Images.js'
 import {Title} from '../Components/Title.js';
 import { Segment,Button } from 'semantic-ui-react';

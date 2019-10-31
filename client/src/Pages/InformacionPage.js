@@ -1,5 +1,4 @@
 import React from 'react';
-import App from '../App.js'
 import '../App.css'
 import InformacionForm from '../Components/Informacion.js';
 import {Title} from '../Components/Title.js';

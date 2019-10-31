@@ -49,10 +49,10 @@
   align-items: center;
 }
 .PantallaButton{
-  height: calc(100vh - 232px)!important;
+  height: calc(100% - 232px)!important;
 }
 .PantallaNoButton{
-  height: calc(100vh - 182px)!important;
+  height: calc(100% - 182px)!important;
 }
 .Salto{
   height: 14px;
@@ -72,4 +72,18 @@
 .icono{
   width: 50%;
 }
-
+.delete{
+  margin-left: 91% !important;
+  margin-bottom: 1% !important;
+  text-align: end;
+  margin-right: 1em !important;
+}
+.info{
+  margin-bottom: 1% !important;
+  text-align: end;
+  padding-left: 80vw;
+  margin-right: 1em !important;
+}
+.rowres{
+  margin-top: 0.5% !important
+}
