@@ -15,23 +15,23 @@ class ResList extends Component {
             <Card color='green' >
                 <Card.Content>
                 <Card.Header>Responsable:{" "+file.responsable}</Card.Header>
-                    <div className=" rowres d-flex flex-row">
-                        <div className="d-flex flex-row">Mesa: {" "+file.identificador}</div>
-                        <div className="info d-flex flex-row">Contacto:{" "+file.telefono}</div>      
+                    <div className="rowres d-flex flex-column">
+                        <div>Mesa: {" "+file.identificador}</div>
+                        <div >Contacto:{" "+file.telefono}</div>      
                     </div>
-                    <div className="rowres d-flex flex-row">
-                        <div className="d-flex flex-row">Fecha: {" "+file.fecha}</div>
-                        <div className="d-flex flex-row">idreserva:{" "+file._id}</div>      
+                    <div className="rowres d-flex flex-column">
+                        <div >Fecha: {" "+file.fecha}</div>
+                        <div >idreserva:{" "+file._id}</div>      
                     </div>
                     <Card.Content extra>
-                        <div className='ui two buttons'>
-                        <Button basic color='green'>
-                            Approve
-                        </Button>
-                        <Button basic color='red'>
-                            Decline
-                        </Button>
-                        </div>
+                    <div className='ui two buttons align-bottom'>
+                    <Button basic color='green'>
+                        Detalle
+                    </Button>
+                    <Button basic color='red'>
+                        Eliminar
+                    </Button>
+                    </div>
                     </Card.Content>
                 </Card.Content>
             </Card>

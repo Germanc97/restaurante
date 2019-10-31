@@ -9,7 +9,7 @@ import ResList from './ResList.js'
         result:[
         {
         _id: 1,
-        responsable:"David",
+        responsable:"David Hernandez",
         username:"@TengoHambre",
         fecha: '01/11/2019',
         identificador: 2,
@@ -17,7 +17,7 @@ import ResList from './ResList.js'
         },
         {
             _id: 2,
-            responsable:"Elizabeth",
+            responsable:"Elizabeth Moncada",
             username:"@TengoHambre:p",
             fecha: '01/11/2019',
             identificador: 3,
@@ -25,7 +25,7 @@ import ResList from './ResList.js'
         },
         {
             _id: 3,
-            responsable:"German",
+            responsable:"German Caycedo Mutis",
             username:"@TengoHambre-.-",
             fecha: '01/11/2019',
             identificador: 4,
@@ -33,7 +33,7 @@ import ResList from './ResList.js'
         },
         {
             _id: 4,
-            responsable:"Caliche",
+            responsable:"Kypper Gonzales",
             username:"@TengoHambre-.-'",
             fecha: '01/11/2019',
             identificador: 5,
@@ -57,7 +57,7 @@ import ResList from './ResList.js'
    render(){
     
      return(
-      <Card.Group centered itemsPerRow={2}>
+      <Card.Group itemsPerRow={4}>
         <ResList  Content={this.state.result}></ResList>
       </Card.Group>
      )
