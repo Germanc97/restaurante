@@ -75,7 +75,8 @@ dbo.collection("Event").insertMany(entries);
 
 //----------------------------------------------------------------------------------------
 // INSERT - COLECCIÓN 'IMAGES'
-var entries = [{restaurant_id: 1,
+var entries = [{_id:1,
+  restaurant_id: 1,
   name: "Foto de noche",
   url: "C:/Allá"
 }]
