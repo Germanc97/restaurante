@@ -88,8 +88,7 @@ class Menum extends Component {
             active={activeItem === 'Decoración'}
             onClick={this.handleItemClick}
           />
-           <Menu.Item
-            name='Comentarios'
+           <Menu.Item as={ Link } name='Comentarios' to ="/Comentarios"           
             active={activeItem === 'Comentarios'}
             onClick={this.handleItemClick}
           />

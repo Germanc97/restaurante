@@ -89,3 +89,12 @@
 .rowres{
   margin-top: 1% !important;
 }
+.bold{
+  font-weight: bold;
+}
+.center {
+  margin: auto;
+  width: 700px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}

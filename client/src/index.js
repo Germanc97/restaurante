@@ -8,6 +8,7 @@ import App from './App.js';
 import Reservas from './Pages/ReservasPage.js'
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router,Route} from "react-router-dom";
+import ComentariosPages from './Pages/ComentariosPages.js';
 const Conections=
     <Router>
         <App/>
@@ -15,6 +16,7 @@ const Conections=
         <Route path="/Galeria" component={galeria} />
         <Route path="/Mesas" component={Mesas} />
         <Route path="/Reservas" component={Reservas}/>
+        <Route path="/Comentarios" component={ComentariosPages}/>
     </Router>;
 ReactDOM.render(Conections, document.getElementById('root'));
 
