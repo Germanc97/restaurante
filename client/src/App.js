@@ -38,7 +38,7 @@ class App extends Component {
         {this.state.result.map((data, i) => (
         <div className="UserInformation" key={i}>
           Bienvenido, 
-          {" "+data.name}
+          {" "+data.name||"Nombre restaurante"}
           <div><Rating icon='star' defaultRating={data.puntuation} maxRating={data.puntuation} disabled icon='star' size='huge'/></div>
         </div>
         ))}
@@ -78,8 +78,7 @@ class Menum extends Component {
           <Menu.Item as={ Link }  name='Galería' to ="/Galeria"          
             active={activeItem === 'Galería'}
             onClick={this.handleItemClick}/>
-           <Menu.Item
-            name='Eventos'
+           <Menu.Item  as={ Link } name='Eventos' to ="/Eventos"
             active={activeItem === 'Eventos'}
             onClick={this.handleItemClick}
           />

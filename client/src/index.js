@@ -7,7 +7,7 @@ import Mesas from  './Pages/MesasPage'
 import App from './App.js';
 import Reservas from './Pages/ReservasPage.js'
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter as Router,Route} from "react-router-dom";
+import {BrowserRouter as Router,Route, Redirect} from "react-router-dom";
 import ComentariosPages from './Pages/ComentariosPages.js';
 const Conections=
     <Router>
@@ -16,7 +16,8 @@ const Conections=
         <Route path="/Galeria" component={galeria} />
         <Route path="/Mesas" component={Mesas} />
         <Route path="/Reservas" component={Reservas}/>
-        <Route path="/Comentarios" component={ComentariosPages}/>
+        <Route path="/Comentarios" component={ComentariosPages}/> 
+        <Route path="/Eventos" component={Redirect} loc="181.50.100.167:4001/Events"/>
     </Router>;
 ReactDOM.render(Conections, document.getElementById('root'));
 
