@@ -335,9 +335,26 @@ app.put('/putUpdateRestaurant',function(req,res){
             if (err) throw err;
             var dbo = db.db("Restaurants");
             var identity={_id:parseInt(newUpdatedRestaurant._id,10)}
-            var newValues={$set:{name:newUpdatedRestaurant.name,description:newUpdatedRestaurant.description,
-            city_id:parseInt(newUpdatedRestaurant.city_id,10),telephone:newUpdatedRestaurant.telephone,email:newUpdatedRestaurant.email,
-            address:newUpdatedRestaurant.address,schedule:newUpdatedRestaurant.schedule}};
+            var n={};
+            if (!(newUpdatedRestaurant.name === undefined)){
+                n.name=newUpdatedRestaurant.name;
+            }
+            if (!(newUpdatedRestaurant.description === undefined)){
+                n.description=newUpdatedRestaurant.description;
+            }
+            if (!(newUpdatedRestaurant.telephone === undefined)){
+                n.telephone=parseInt(newUpdatedRestaurant.telephone,10);
+            }
+            if (!(newUpdatedRestaurant.email === undefined)){
+                n.email=newUpdatedRestaurant.email;
+            }
+            if (!(newUpdatedRestaurant.address === undefined)){
+                n.address=newUpdatedRestaurant.address;
+            }
+            if (!(newUpdatedRestaurant.schedule === undefined)){
+                n.schedule=newUpdatedRestaurant.schedule;
+            }
+            var newValues={$set:n};
             dbo.collection("Restaurant").updateOne(identity,newValues,function(err,res){
                 if (err) throw err;
                 db.close();
