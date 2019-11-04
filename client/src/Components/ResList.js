@@ -36,6 +36,5 @@ class ResList extends Component {
                 </Card.Content>
             </Card>
         )}))
-    
     }}
 export default ResList;

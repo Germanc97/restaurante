@@ -63,6 +63,5 @@ import ResList from './ResList.js'
      )
   }
 }
-
 export default CardsRes
 

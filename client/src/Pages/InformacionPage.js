@@ -9,7 +9,7 @@ class PageInf extends React.Component {
 }
 
 _fetchMovie(){
-fetch('http://181.50.100.167:5000/getRestaurant/2')
+fetch('http://181.50.100.167:5000/getRestaurant/1')
 .then(res => res.json())
 .then(result => {
   const {Content=[]}=result
