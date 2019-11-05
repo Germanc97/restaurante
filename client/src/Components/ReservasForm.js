@@ -6,43 +6,10 @@ import ResList from './ResList.js'
 
  class CardsRes extends Component {
   state={
-        result:[
-        {
-        _id: 1,
-        responsable:"David Hernandez",
-        username:"@TengoHambre",
-        fecha: '01/11/2019',
-        identificador: 2,
-        telefono: '30242356',
-        },
-        {
-            _id: 2,
-            responsable:"Elizabeth Moncada",
-            username:"@TengoHambre:p",
-            fecha: '01/11/2019',
-            identificador: 3,
-            telefono: '30242356',
-        },
-        {
-            _id: 3,
-            responsable:"German Caycedo Mutis",
-            username:"@TengoHambre-.-",
-            fecha: '01/11/2019',
-            identificador: 4,
-            telefono: '30248556'
-        },
-        {
-            _id: 4,
-            responsable:"Kypper Gonzales",
-            username:"@TengoHambre-.-'",
-            fecha: '01/11/2019',
-            identificador: 5,
-            telefono: '30002356'
-        },
-    ]
+        result:[]
     }
     _fetchMovie(){
-        fetch('http://181.50.100.167:5000/getRestaurant/2')
+        fetch('http://181.50.100.167:8000/api/getActiveReservationsByRestaurantId/1')
         .then(res => res.json())
         .then(result => {
         const {Content=[]}=result
@@ -51,9 +18,9 @@ import ResList from './ResList.js'
         })        
     }
 
-    //componentDidMount(){
-    //this._fetchMovie()
-    //}
+    componentDidMount(){
+    this._fetchMovie()
+    }
    render(){
     
      return(
@@ -63,5 +30,6 @@ import ResList from './ResList.js'
      )
   }
 }
+
 export default CardsRes
 

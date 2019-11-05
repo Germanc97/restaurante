@@ -85,8 +85,10 @@ app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
                 var entries = [{$match: { "restaurant_id": { $eq:1}}},{$group: {_id:null, AvgPuntuation: {$avg:"$puntuation"}}},{ $project : { _id:0}}];
                 dbo.collection("Comments").aggregate(entries).toArray(function(err, result) {
                     if (err) throw err;
-                    var value=result;
-                    console.log(result);
+                    var value=0;
+                    if (!(result.length===0)){
+                        value=Math.floor(result[0].AvgPuntuation);
+                    }
                     outValue=[{name:restaurantName,puntuation:value}];
                     res.status(200).json({
                         "Response":2,
@@ -126,8 +128,8 @@ app.get('/getImagesxRestaurant/:idRestaurant',function(req,res){
         });
     }
 });
-app.get('/getRestaurantsxCity/:idRestaurant',function(req,res){
-    var idn=req.params.idRestaurant;
+app.get('/getRestaurantsxCity/:idCity',function(req,res){
+    var idn=req.params.idCity;
     try{
         var MongoClient = require('mongodb').MongoClient;
         var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
@@ -229,7 +231,7 @@ app.get('/getReviewsxRestaurant/:idRestaurant',function(req,res){
     }
 });
 app.get('/getCity/:idCity',function(req,res){
-    var idn=req.params.idRestaurant;
+    var idn=req.params.idCity;
     try{
         var MongoClient = require('mongodb').MongoClient;
         var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
