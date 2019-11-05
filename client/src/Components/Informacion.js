@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import '../semantic/semantic.min.css'
 import { Segment, Form } from 'semantic-ui-react'
 
-
+console.log(PropTypes)
 class InformacionForm extends Component {
   PropTypes ={
-    Content : PropTypes.array,
+    Content: PropTypes.array
   }
   state = {
     _id:"",
@@ -26,7 +26,46 @@ class InformacionForm extends Component {
       name: e.target.value
     });
   }
-  
+
+  handleChangeAddress = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    this.setState({
+      address: e.target.value
+    });
+  }
+
+  handleChangeTelephone = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    this.setState({
+      telephone: e.target.value
+    });
+  }
+
+  handleChangeEmail = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    this.setState({
+      email: e.target.value
+    });
+  }
+
+  handleChangeSchedule = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    this.setState({
+      schedule: e.target.value
+    });
+  }
+
+  handleChangeDescription = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    this.setState({
+      description: e.target.value
+    });
+  }
   _handleSubmit=(e)=>{
       var name1 = this.state.name
       var description1 = this.state.description
@@ -35,15 +74,16 @@ class InformacionForm extends Component {
       var email1 = this.state.email
       var schedule1 = this.state.schedule
       var params = {
-        _id:1,
-        name: name1,
-        description: "Muy lujoso",
-        city_id: 2,
-        telephone: 12348756,
-        email: "rest2@yopmail.com",
-        address: "Lejos de aqui",
-        schedule: "Lun-Dom 10:00AM-12:00AM"
+        _id:this.props.Content[0]._id,
+        name: name1 || this.props.Content[0].name ,
+        description: description1 || this.props.Content[0].description,
+        city_id: this.props.Content[0].city_id,
+        telephone: telephone1 || this.props.Content[0].telephone,
+        email: email1 || this.props.Content[0].email,
+        address: address1 || this.props.Content[0].address,
+        schedule: schedule1 || this.props.Content[0].schedule
       }
+      console.log(params)
       var request = {
         method: 'PUT',
         headers:{
@@ -63,7 +103,7 @@ class InformacionForm extends Component {
 
 render(){
     const {Content} = this.props
-  return (  
+  return(  
     Content.map(User =>{
     return(
         <div key={User._id}>           
@@ -86,7 +126,7 @@ render(){
                               Dirección:
                               </label>
                               <div className="ui left input">
-                              <input type="text" placeholder={User.address ||"Ingresa la dirección"}></input>
+                              <input type="text" placeholder={User.address ||"Ingresa la dirección"} onChange={this.handleChangeAddress}></input>
                               </div>
                               </div>
                               <br/>
@@ -95,7 +135,7 @@ render(){
                               Telefono:
                               </label>
                               <div className="ui left input">
-                              <input type="text" placeholder={User.telephone ||"Ingresa el telefono"}></input>
+                              <input type="text" placeholder={User.telephone ||"Ingresa el telefono"} onChange={this.handleChangeTelephone}></input>
                               </div>
                               </div>
                       </div>
@@ -105,7 +145,7 @@ render(){
                               Correo:
                               </label>
                               <div className="ui left input">
-                              <input type="text" placeholder={User.email ||"Nombre restaurante"}></input>
+                              <input type="text" placeholder={User.email ||"Nombre restaurante"} onChange={this.handleChangeEmail}></input>
                               </div>
                               </div>
                               <br/>
@@ -114,7 +154,7 @@ render(){
                               Horario:
                               </label>
                               <div className="ui left input">
-                              <input type="text" placeholder={User.schedule ||"ej. Lun - Dom 10:00AM - 12:00AM"}></input>
+                              <input type="text" placeholder={User.schedule ||"ej. Lun - Dom 10:00AM - 12:00AM"} onChange={this.handleChangeSchedule}></input>
                               </div>
                               </div>
                               <br/>
@@ -122,7 +162,7 @@ render(){
                             <label>
                             Descripción:
                             </label>
-                            <div className="ui left textarea"><textarea placeholder={User.description || "Cuentanos de ti"} rows="3"></textarea></div>
+                            <div className="ui left textarea"><textarea placeholder={User.description || "Cuentanos de ti"} rows="3" onChange={this.handleChangeDescription}></textarea></div>
                             </div>
                             <br/>
                       </div>
@@ -134,11 +174,9 @@ render(){
                 </div>
                 </Form>
                 </Segment>               
-                </div>
-      
+                </div>     
         )
-     })
-            
+     })          
      )
     }
 }
