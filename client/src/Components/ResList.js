@@ -12,16 +12,16 @@ class ResList extends Component {
       return(
         Content.map(file =>{
         return(
-            <Card color='green' >
+            <Card color='green'key={file.PK_idReservation} >
                 <Card.Content>
-                <Card.Header>Responsable:{" "+file.responsable}</Card.Header>
+                <Card.Header>{file.firstname+" "+file.secondname+" "+file.firstLastname+" "+file.secondLastname || "Responsable"}</Card.Header>
                     <div className="rowres d-flex flex-column">
-                        <div>Mesa: {" "+file.identificador}</div>
-                        <div >Contacto:{" "+file.telefono}</div>      
+                        <div>Mesa: {" "+file.idTableRest || "No se ha definido mesa"}</div>
+                        <div >Contacto:{" "+file.telephone || "No hay contacto"}</div>      
                     </div>
                     <div className="rowres d-flex flex-column">
-                        <div >Fecha: {" "+file.fecha}</div>
-                        <div >idreserva:{" "+file._id}</div>      
+                        <div >Fecha: {" "+file.reservationDate || "Fecha por definir"}</div>
+                        <div >idreserva:{" "+file.PK_idReservation}</div>      
                     </div>
                     <Card.Content extra>
                     <div className='ui two buttons align-bottom'>
@@ -36,5 +36,6 @@ class ResList extends Component {
                 </Card.Content>
             </Card>
         )}))
+    
     }}
 export default ResList;
