@@ -3,7 +3,7 @@ import '../App.css';
 import PropTypes from 'prop-types'
 import '../semantic/semantic.min.css'
 import { Segment, Form } from 'semantic-ui-react'
-
+import Error from '../ImgSrc/ErrorServer.png'
 console.log(PropTypes)
 class InformacionForm extends Component {
   PropTypes ={
@@ -103,81 +103,91 @@ class InformacionForm extends Component {
 
 render(){
     const {Content} = this.props
-  return(  
-    Content.map(User =>{
-    return(
-        <div key={User._id}>           
-        <Segment className="PantallaNoButton">
-        <Form onSubmit={this._handleSubmit}>    
-        <div className="container">
-                  <div className="row">
-                      <div className="col-6 ">                     
-                              <div className="field">
-                              <label>
-                              Nombre:
-                              </label>
-                              <div className="ui left input">
-                              <input type="text" placeholder={User.name ||"Nombre restaurante"} onChange={this.handleChangeName}></input>
-                              </div>
-                              </div>
-                              <br/>
-                              <div className="field">
-                              <label>
-                              Dirección:
-                              </label>
-                              <div className="ui left input">
-                              <input type="text" placeholder={User.address ||"Ingresa la dirección"} onChange={this.handleChangeAddress}></input>
-                              </div>
-                              </div>
-                              <br/>
-                              <div className="field">
-                              <label>
-                              Telefono:
-                              </label>
-                              <div className="ui left input">
-                              <input type="text" placeholder={User.telephone ||"Ingresa el telefono"} onChange={this.handleChangeTelephone}></input>
-                              </div>
-                              </div>
-                      </div>
-                      <div className="col-6">
-                      <div className="field">
-                              <label>
-                              Correo:
-                              </label>
-                              <div className="ui left input">
-                              <input type="text" placeholder={User.email ||"Nombre restaurante"} onChange={this.handleChangeEmail}></input>
-                              </div>
-                              </div>
-                              <br/>
-                            <div className="field">
-                            <label>
-                              Horario:
-                              </label>
-                              <div className="ui left input">
-                              <input type="text" placeholder={User.schedule ||"ej. Lun - Dom 10:00AM - 12:00AM"} onChange={this.handleChangeSchedule}></input>
-                              </div>
-                              </div>
-                              <br/>
-                            <div className="field">
-                            <label>
-                            Descripción:
-                            </label>
-                            <div className="ui left textarea"><textarea placeholder={User.description || "Cuentanos de ti"} rows="3" onChange={this.handleChangeDescription}></textarea></div>
-                            </div>
-                            <br/>
-                      </div>
+    console.log("Ya estas en Informacion.js")
+  if(Content.length === 0){
+    console.log(Content)
+    return <div>
+      <img scr={Error} alt='Vale shit'/>
+    </div>
+  ;}else{
+      console.log("eNTRE EN ELSE")
+      return(  
+    
+        Content.map(User =>{
+        return(
+            <div key={User._id}>           
+            <Segment className="PantallaNoButton">
+            <Form onSubmit={this._handleSubmit}>    
+            <div className="container">
+                      <div className="row">
+                          <div className="col-6 ">                     
+                                  <div className="field">
+                                  <label>
+                                  Nombre:
+                                  </label>
+                                  <div className="ui left input">
+                                  <input type="text" placeholder={User.name ||"Nombre restaurante"} onChange={this.handleChangeName}></input>
+                                  </div>
+                                  </div>
+                                  <br/>
+                                  <div className="field">
+                                  <label>
+                                  Dirección:
+                                  </label>
+                                  <div className="ui left input">
+                                  <input type="text" placeholder={User.address ||"Ingresa la dirección"} onChange={this.handleChangeAddress}></input>
+                                  </div>
+                                  </div>
+                                  <br/>
+                                  <div className="field">
+                                  <label>
+                                  Telefono:
+                                  </label>
+                                  <div className="ui left input">
+                                  <input type="text" placeholder={User.telephone ||"Ingresa el telefono"} onChange={this.handleChangeTelephone}></input>
+                                  </div>
+                                  </div>
+                          </div>
+                          <div className="col-6">
+                          <div className="field">
+                                  <label>
+                                  Correo:
+                                  </label>
+                                  <div className="ui left input">
+                                  <input type="text" placeholder={User.email ||"Nombre restaurante"} onChange={this.handleChangeEmail}></input>
+                                  </div>
+                                  </div>
+                                  <br/>
+                                <div className="field">
+                                <label>
+                                  Horario:
+                                  </label>
+                                  <div className="ui left input">
+                                  <input type="text" placeholder={User.schedule ||"ej. Lun - Dom 10:00AM - 12:00AM"} onChange={this.handleChangeSchedule}></input>
+                                  </div>
+                                  </div>
+                                  <br/>
+                                <div className="field">
+                                <label>
+                                Descripción:
+                                </label>
+                                <div className="ui left textarea"><textarea placeholder={User.description || "Cuentanos de ti"} rows="3" onChange={this.handleChangeDescription}></textarea></div>
+                                </div>
+                                <br/>
+                          </div>
+                        </div>
                     </div>
-                </div>
-                <div className="form-row justify-content-end align-items-end">           
-                <button className="ui inverted secondary button" type="submit">Aceptar</button>
-                <button className="ui inverted secondary button">Cancelar</button>
-                </div>
-                </Form>
-                </Segment>               
-                </div>     
-        )
-     })          
-     )
+                    <div className="form-row justify-content-end align-items-end">           
+                    <button className="ui inverted secondary button" type="submit">Aceptar</button>
+                    <button className="ui inverted secondary button">Cancelar</button>
+                    </div>
+                    </Form>
+                    </Segment>               
+                    </div>     
+            )
+         })          
+         );
+     }
     }
 }
 export default InformacionForm;
