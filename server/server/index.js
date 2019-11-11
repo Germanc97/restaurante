@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-app.use(fileUpload());
+app.use(fileUpload({createParentPath:true}));
 //get methods
 app.get('/getCities',function(req,res){
     try{
@@ -415,7 +415,7 @@ app.post('/postRestaurant',function(req,res){
     }
 });
 app.post('/postPrueba',function(req,res){
-    var route='/home/admi/'
+    var route='home/admi/restaurante/Imagenes/'
     let file = req.files.archivo;
     let fileName = file.name.split('.')[0];
     if (!req.files || Object.keys(req.files).length === 0) { //si ningun archivo es detectado en la peticion que se envio
