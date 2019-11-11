@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-app.use(fileUpload());
+app.use(fileUpload({createParentPath:true}));
 //get methods
 app.get('/getCities',function(req,res){
     try{
@@ -415,7 +415,7 @@ app.post('/postRestaurant',function(req,res){
     }
 });
 app.post('/postPrueba',function(req,res){
-    var route='/home/admi/restaurante/Imagenes/'
+    var route='home/admi/restaurante/Imagenes/'
     let file = req.files.archivo;
     let fileName = file.name.split('.')[0];
     if (!req.files || Object.keys(req.files).length === 0) { //si ningun archivo es detectado en la peticion que se envio
@@ -437,12 +437,12 @@ app.post('/postPrueba',function(req,res){
                 entries={_id:idn,restaurant_id:idRestaurant,name:req.body.name,url:route};
                 file.mv(route, (err) => {
                     if (err) throw err
+                    dbo.collection("Images").insertOne(entries,function(err,res){
+                        if (err) throw err;
+                    });
+                    res.end(JSON.stringify({Response:2}));
+                    db.close();
                 });
-                dbo.collection("Images").insertOne(entries,function(err,res){
-                    if (err) throw err;
-                });
-                res.end(JSON.stringify({Response:2}));
-                db.close();
             });
         });
     }catch(err){
