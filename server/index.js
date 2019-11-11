@@ -2,7 +2,7 @@ require('./config/config');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
+const fileUpload=require('express-fileupload');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
@@ -21,6 +21,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+app.use(fileUpload());
 //get methods
 app.get('/getCities',function(req,res){
     try{
@@ -413,6 +414,41 @@ app.post('/postRestaurant',function(req,res){
         res.end(JSON.stringify({Response:1}));
     }
 });
+app.post('/postPrueba',function(req,res){
+    var route='/home/admi/restaurante/Imagenes/'
+    let file = req.files.archivo;
+    let fileName = file.name.split('.')[0];
+    if (!req.files || Object.keys(req.files).length === 0) { //si ningun archivo es detectado en la peticion que se envio
+        res.end(JSON.stringify({Response:1}));
+    }
+    try{
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
+        var idn=0;
+        MongoClient.connect(url,{ useUnifiedTopology: true }, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("Restaurants");
+            var mySort =  { _id:-1 };
+            dbo.collection("Images").find({},{projection: {_id:1}}).sort(mySort).toArray(function(err,result){
+                if (err) throw err;
+                idn=result.length+1;
+                idRestaurant=parseInt(req.body.restaurant_id,10);
+                route=route.concat(idn.toString(),'.jpeg');
+                entries={_id:idn,restaurant_id:idRestaurant,name:req.body.name,url:route};
+                file.mv(route, (err) => {
+                    if (err) throw err
+                });
+                dbo.collection("Images").insertOne(entries,function(err,res){
+                    if (err) throw err;
+                });
+                res.end(JSON.stringify({Response:2}));
+                db.close();
+            });
+        });
+    }catch(err){
+        res.end(JSON.stringify({Response:1}));
+    }
+});
 app.post('/postCity',function(req,res){
     var newCityData=req.body;
     try{
@@ -545,5 +581,4 @@ app.post('/postEvent',function(req,res){
 });
 app.listen(process.env.PORT,()=>{
     console.log('Modulo activo',5000);
-    console.log([{name:"he"}]);
 });
