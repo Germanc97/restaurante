@@ -415,7 +415,7 @@ app.post('/postRestaurant',function(req,res){
     }
 });
 app.post('/postPrueba',function(req,res){
-    var route='/Imagenes/'
+    var route='/home/admi/restaurante/Imagenes/'
     let file = req.files.archivo;
     let fileName = file.name.split('.')[0];
     if (!req.files || Object.keys(req.files).length === 0) { //si ningun archivo es detectado en la peticion que se envio
