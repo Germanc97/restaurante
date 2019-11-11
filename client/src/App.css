@@ -98,3 +98,11 @@
   margin-left: auto !important;
   margin-right: auto !important;
 }
+.ImgErrorButton{
+  width: 100%;
+  height: calc(100vh - 236px);
+}
+.ImgErrorNoButton{
+  width: 100%;
+  height: calc(100vh - 190px);
+}

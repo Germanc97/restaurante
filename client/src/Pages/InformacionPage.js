@@ -13,7 +13,8 @@ fetch('http://181.50.100.167:5000/getRestaurant/1')
 .then(result => {
   const {Content=[]}=result
   if(Content.length ===0){
-    this.setState({result :[1]})
+    const {Content=[]}=[1]
+    this.setState({result : Content})
   }else{
     this.setState({result : Content})
   }  

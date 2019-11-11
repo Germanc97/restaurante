@@ -2,6 +2,7 @@ import React, { Component }  from 'react'
 import {Button,Card } from 'semantic-ui-react'
 import '../semantic/semantic.min.css'
 import PropTypes from 'prop-types'
+import Error from '../ImgSrc/ErrorServer.png'
 import '../App.css';
 class ResList extends Component {
       PropTypes ={
@@ -9,6 +10,9 @@ class ResList extends Component {
       }
       render(){
       const {Content} = this.props
+      if(Content.length === 0){
+        return <img src={Error} className="ImgErrorButton" alt='Vale shit'/>;
+      }else{
       return(
         Content.map(file =>{
         return(
@@ -35,7 +39,7 @@ class ResList extends Component {
                     </Card.Content>
                 </Card.Content>
             </Card>
-        )}))
+        )}))}
     
     }}
 export default ResList;

@@ -4,7 +4,7 @@ import {Title} from '../Components/Title.js';
 import ComentariosForm from '../Components/ComentariosForm.js';
 class PageInf extends React.Component {
     state={
-        result:[  
+        result:[
        ]
     }
 

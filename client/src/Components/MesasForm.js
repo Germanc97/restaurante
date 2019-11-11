@@ -39,22 +39,25 @@ class ListTable extends Component {
     //this._fetchMovie()
     //}
       render(){
-        return(  
-          <Segment className="PantallaButton">
-            <Table stackable size='large'>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Identificador</Table.HeaderCell>
-                <Table.HeaderCell>Capacidad</Table.HeaderCell>
-                <Table.HeaderCell textAlign='right'>Eliminar</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-            <MesasList Content={this.state.result}></MesasList>
-            </Table.Body>
-          </Table>
-           </Segment>
-        )
+        if(this.state.result.length === 0){
+          return <img src={Error} className="ImgError" alt='Vale shit'/>;
+        }else{
+            return(  
+              <Segment className="PantallaButton">
+                <Table stackable size='large'>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Identificador</Table.HeaderCell>
+                    <Table.HeaderCell>Capacidad</Table.HeaderCell>
+                    <Table.HeaderCell textAlign='right'>Eliminar</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                <MesasList Content={this.state.result}></MesasList>
+                </Table.Body>
+              </Table>
+              </Segment>
+            )}
 }
   
 }

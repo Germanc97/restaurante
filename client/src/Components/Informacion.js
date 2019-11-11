@@ -107,7 +107,7 @@ render(){
   if(Content.length === 0){
     console.log(Content)
     return <div>
-      <img scr={Error} alt='Vale shit'/>
+      <img src={Error} className="ImgErrorNoButton" alt='Vale shit'/>
     </div>
   ;}else{
       console.log("eNTRE EN ELSE")
