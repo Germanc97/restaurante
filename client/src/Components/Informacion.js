@@ -107,12 +107,11 @@ render(){
   if(Content.length === 0){
     console.log(Content)
     return <div>
-      <img scr={Error} alt='Vale shit'/>
+      <img src={Error} alt='Vale shit'/>
     </div>
   ;}else{
       console.log("eNTRE EN ELSE")
-      return(  
-    
+      return(      
         Content.map(User =>{
         return(
             <div key={User._id}>           
