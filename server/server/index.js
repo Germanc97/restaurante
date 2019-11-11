@@ -437,12 +437,12 @@ app.post('/postPrueba',function(req,res){
                 entries={_id:idn,restaurant_id:idRestaurant,name:req.body.name,url:route};
                 file.mv(route, (err) => {
                     if (err) throw err
+                    dbo.collection("Images").insertOne(entries,function(err,res){
+                        if (err) throw err;
+                    });
+                    res.end(JSON.stringify({Response:2}));
+                    db.close();
                 });
-                dbo.collection("Images").insertOne(entries,function(err,res){
-                    if (err) throw err;
-                });
-                res.end(JSON.stringify({Response:2}));
-                db.close();
             });
         });
     }catch(err){
