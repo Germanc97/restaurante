@@ -1,7 +1,6 @@
 import React from 'react';
 import '../App.css'
 import InformacionForm from '../Components/Informacion.js';
-import {Title} from '../Components/Title.js';
 class PageInf extends React.Component {
   state={
     result:[
@@ -24,8 +23,6 @@ this._fetchMovie()
     render() {
     return(
       <div>
-      <div className="ui botton attached button"><Title>Información</Title></div> 
-      <div className="Salto"/>
       <InformacionForm Content={this.state.result}></InformacionForm>
       </div>
     );
