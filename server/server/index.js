@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-app.use(fileUpload({createParentPath:true}));
+app.use(fileUpload({createParentPath:true,useTempFiles:true}));
 //get methods
 app.get('/getCities',function(req,res){
     try{
