@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //setting control for the correct use of APIs
 //esta es una prueba de cambio
-//app.use('/static', express.static(__dirname +'/files'));
+app.use('/static', express.static(__dirname +'/Imagenes'));
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
