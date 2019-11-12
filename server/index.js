@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //setting control for the correct use of APIs
 //esta es una prueba de cambio
-app.use('/static', express.static(__dirname +'/Imagenes'));
+app.use('/static', express.static('/home/admi/restaurante/server/Imagenes'));
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -444,7 +444,7 @@ app.post('/postRestaurant',function(req,res){
     }
 });
 app.post('/postPrueba',function(req,res){
-    var route='../Imagenes/'
+    var route='Imagenes/'
     let file = req.files.archivo;
     let fileName = file.name.split('.')[0];
     if (!req.files || Object.keys(req.files).length === 0) { //si ningun archivo es detectado en la peticion que se envio
