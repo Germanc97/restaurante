@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //setting control for the correct use of APIs
 //esta es una prueba de cambio
+//app.use('/static', express.static(__dirname +'/files'));
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -24,6 +25,11 @@ app.use(function (req, res, next) {
 });
 app.use(fileUpload({createParentPath:true,useTempFiles:true}));
 //get methods
+app.get('/getu',function(req,res){
+    res.json({
+        "response":__dirname
+    });
+});
 app.get('/getCities',function(req,res){
     try{
         var MongoClient = require('mongodb').MongoClient;
