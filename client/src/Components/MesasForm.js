@@ -25,11 +25,11 @@ class ListTable extends Component {
       console.log(id)
       this._fetchMovie(id)
     }
-    
+
     render(){
       const Content = this.state.result
       if (Content.length === 0){
-        return <img src={Error} className="ImgErrorButton" alt='Vale shit'/>;
+        return <img src={Error} className="ImgErrorButton"/>;
       }else if (Content[0]=== 1){
         return <div className="waiting"> 
                 <br></br><div className="ui active centered inline loader loader "></div>

@@ -9,30 +9,77 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      result: []
+      id:"",
+      result: [],
+      activeItem: ''
     }
   }
-  _fetchMovie(){
-  fetch('http://181.50.100.167:5000/getRestaurantPuntuation/1')
+  handleItemClick = (e, { name }) => {
+    return this.setState({ activeItem: name });
+  };
+  _fetchMovie(id){
+  fetch('http://181.50.100.167:5000/getRestaurantPuntuation/'+id)
   .then(res => res.json())
   .then(result => {
     const {Content=[]}=result
     this.setState({result : Content})
+    this.setState({id : id})
     console.log(this.state.result);
   }) 
   //.catch(console.log)     
   }
 
   componentDidMount(){
-  this._fetchMovie()
+    let url = window.location.href;
+    let urlSplit = url.split("?")
+    const id = urlSplit[1].split("=")[1];
+    console.log(id)
+    this.setState({id : id})
+    this._fetchMovie(id)
   }
   render(){
+  const { activeItem } = this.state
   return (
     <div>
       <header className="App-header">
         <div className="Menu">
         <img src={logo} className="App-logo" alt="logo"/>
-        <Menum/>
+        <Menu inverted pointing secondary>
+          <Menu.Item as={ Link } name='Información' to ={"/?id="+this.state.id}
+            active={activeItem === 'Información'}
+            onClick={this.handleItemClick}>
+          </Menu.Item>
+          <Menu.Item as={ Link } name='Reservas' to ={'/Reservas/?id='+this.state.id}
+            active={activeItem === 'Reservas'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name='Buzón'
+            active={activeItem === 'Buzón'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item as={ Link }  name='Galería' to ={'/Galeria/?id='+this.state.id}        
+            active={activeItem === 'Galería'}
+            onClick={this.handleItemClick}/>
+           <Menu.Item  href='http://181.50.100.167:4001/Events' target='_self'
+           name='Eventos'
+           active={activeItem === 'Eventos'}
+           onClick={this.handleItemClick}
+          >Eventos</Menu.Item>
+           <Menu.Item
+            name='Decoración'
+            active={activeItem === 'Decoración'}
+            onClick={this.handleItemClick}
+          />
+           <Menu.Item as={ Link } name='Comentarios' to ={'/Comentarios/?id='+this.state.id}            
+            active={activeItem === 'Comentarios'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item as={ Link } name='Mesas' to ={'/Mesas/?id='+this.state.id}  
+            active={activeItem === 'Mesas'}
+            onClick={this.handleItemClick}
+          />
+        </Menu>
         <br/>
         </div>
         {this.state.result.map((data, i) => (
@@ -51,53 +98,3 @@ class App extends Component {
   }
 }
 export default App;
-
-
-
-class Menum extends Component {
-  state = { activeItem: '' || this.state }
-  handleItemClick = (e, { name }) => {
-    return this.setState({ activeItem: name });
-  };
-
-  render() {
-    const { activeItem } = this.state
-    return (
-        <Menu inverted pointing secondary>
-          <Menu.Item as={ Link } name='Información' to ="/"
-            active={activeItem === 'Información'}
-            onClick={this.handleItemClick}>
-          </Menu.Item>
-          <Menu.Item as={ Link } name='Reservas' to ='/Reservas'
-            active={activeItem === 'Reservas'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='Buzón'
-            active={activeItem === 'Buzón'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item as={ Link }  name='Galería' to ="/Galeria"          
-            active={activeItem === 'Galería'}
-            onClick={this.handleItemClick}/>
-           <Menu.Item  as={ Link } name='Eventos' to ="/Eventos"
-            active={activeItem === 'Eventos'}
-            onClick={this.handleItemClick}
-          />
-           <Menu.Item
-            name='Decoración'
-            active={activeItem === 'Decoración'}
-            onClick={this.handleItemClick}
-          />
-           <Menu.Item as={ Link } name='Comentarios' to ="/Comentarios"           
-            active={activeItem === 'Comentarios'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item as={ Link } name='Mesas' to ="/Mesas"
-            active={activeItem === 'Mesas'}
-            onClick={this.handleItemClick}
-          />
-        </Menu>
-    )
-  }
-}

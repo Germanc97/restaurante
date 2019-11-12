@@ -22,7 +22,7 @@ componentDidMount(){
   let urlSplit = url.split("?")
   const id = urlSplit[1].split("=")[1];
   console.log(id)
-  this._fetchMovie()
+  this._fetchMovie(id)
 }
     render() {
     return(
