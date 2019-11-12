@@ -509,8 +509,8 @@ app.post('/postReview',function(req,res){
             dbo.collection("Cities").find({},{projection: {_id:1}}).sort(mySort).toArray(function(err,result){
                 if (err) throw err;
                 idn=result.length;
-                entries={_id:(idn+1),restaurant_id:parseInt(newReviewData.restaurant_id,10),user_id:parseInt(newReviewData.user_id,10),
-                    puntuation:parseInt(newReviewData.puntuation,10),coment:newReviewData.coment};
+                entries={_id:(idn+1),restaurant_id:parseInt(newReviewData.restaurant_id,10),autor_id:parseInt(newReviewData.user_id,10),
+                    puntuation:parseInt(newReviewData.puntuation,10),comment:newReviewData.comment};
                 dbo.collection("Comments").insertOne(entries,function(err,res){
                     if (err) throw err;
                 });
