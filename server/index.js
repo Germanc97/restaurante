@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
 });
 app.use(fileUpload({createParentPath:true,useTempFiles:true}));
 //get methods
-app.get('/getu',function(req,res){
+app.get('/getCanada',function(req,res){
     res.json({
         "response":__dirname
     });
