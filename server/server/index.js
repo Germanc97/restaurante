@@ -69,6 +69,28 @@ app.get('/getRestaurant/:idRestaurant',function(req,res){
         });
     }
 });
+app.get('/getRestaurants',function(req,res){
+    try{
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
+        MongoClient.connect(url,{ useUnifiedTopology: true }, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("Restaurants");
+            dbo.collection("Restaurant").find({}).toArray(function(err, result) {
+                if (err) throw err;
+                res.status(200).json({
+                    "Response":2,
+                    "Content":result
+                });
+                db.close();
+            });
+        });
+    }catch(err){
+        res.json({
+            "response":1
+        });
+    }
+});
 app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
     var idn=req.params.idRestaurant;
     try{
@@ -406,12 +428,12 @@ app.post('/postRestaurant',function(req,res){
                 dbo.collection("Restaurant").insertOne(entries,function(err,res){
                     if (err) throw err;
                 });
-                res.end(JSON.stringify({Response:2}));
+                res.end(JSON.stringify({Response:(idn+1)}));
                 db.close();
             });
         });
     }catch(err){
-        res.end(JSON.stringify({Response:1}));
+        res.end(JSON.stringify({Response:0}));
     }
 });
 app.post('/postPrueba',function(req,res){
@@ -487,9 +509,9 @@ app.post('/postReview',function(req,res){
             dbo.collection("Cities").find({},{projection: {_id:1}}).sort(mySort).toArray(function(err,result){
                 if (err) throw err;
                 idn=result.length;
-                entries={_id:(idn+1),restaurant_id:parseInt(newReviewData.restaurant_id,10),user_id:parseInt(newReviewData.user_id,10),
+                entries={_id:(idn+1),restaurant_id:parseInt(newReviewData.restaurant_id,10),user_id:newReviewData.user_id,
                     puntuation:parseInt(newReviewData.puntuation,10),coment:newReviewData.coment};
-                dbo.collection("Cities").insertOne(entries,function(err,res){
+                dbo.collection("Comments").insertOne(entries,function(err,res){
                     if (err) throw err;
                 });
                 res.end(JSON.stringify({Response:2}));
@@ -510,9 +532,8 @@ app.post('/postAgreement',function(req,res){
             if (err) throw err;
             var dbo = db.db("Restaurants");
             var mySort =  { _id:-1 };
-            
             dbo.collection("Agreement").find({},{projection: {_id:1}}).sort(mySort).toArray(function(err,result){
-                if (err) throw idn=0;
+                if (err) throw err;
                 idn=result.length;
                 entries={_id:(idn+1),restaurant_id:parseInt(newAgreementData.restaurant_id,10),nameAgreement:newAgreementData.nameAgreement,
                     discount:parseInt(newAgreementData.discount,10),CutDate:newAgreementData.CutDate};
