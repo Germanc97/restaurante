@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 import PropTypes from 'prop-types'
 import '../semantic/semantic.min.css'
 
@@ -14,30 +16,42 @@ class InformacionForm extends Component {
     Content.map(User =>{
     return(
       <div key={User._id}>
-                            <label>
-                            Nombre:
-                            </label>
-                            {User.name ||"Nombre restaurante"}
-                            <label>
+      <div className="Information-Container">
+      <div className="Column-Information">
+                            <label className="font-weight-bold" style={{fontSize: '22px', color:"rgba(241, 185, 17, 0.746)"}}>
+                            Encuentranos Aqui!!!
+                            </label>                 
+                            <label className="font-weight-bold"  style={{fontSize: '18px'}}>
                             Dirección:
-                            </label>
-                            {User.address ||"Ingresa la dirección"}
-                            <label>
+                            </label>   
+                            <label style={{fontSize: '17px'}}>{User.address ||"Dirección"}</label>                          
+                             
+                            <label className="font-weight-bold" style={{fontSize: '18px'}}>
                             Telefono:
                             </label>
-                            {User.telephone ||"Ingresa el telefono"}
-                            <label>
+                            <label style={{fontSize: '17px'}}>
+                            {User.telephone ||"Telefono"}
+                            </label>
+                            <label className="font-weight-bold" style={{fontSize: '18px'}}>
                             Correo:
                             </label>
-                            {User.email ||"Nombre restaurante"}
-                          <label>
+                            <label style={{fontSize: '17px'}}>
+                            {User.email ||"Email"}
+                            </label>
+                          <label className="font-weight-bold" style={{fontSize: '18px'}}>
                             Horario:
                             </label>
-                            {User.schedule ||"ej. Lun - Dom 10:00AM - 12:00AM"}
-                          <label>
+                            <label style={{fontSize: '17px'}}>
+                            {User.schedule ||"Horario"}
+                            </label>
+                          <label className="font-weight-bold" style={{fontSize: '18px'}}>
                           Descripción:
-                          </label>
+                          </label >
+                          <label style={{fontSize: '17px'}}>
                           {User.description || "Cuentanos de ti"}
+                          </label>
+        </div>
+        </div>
         </div>
      ) })
             
