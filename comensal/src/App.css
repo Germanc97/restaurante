@@ -11,7 +11,7 @@
 .Menu {
   display: flex;
   flex-direction: row;
-  width: 82%;
+  width: 90%;
 }
 .columna {
   padding-left:50px,
@@ -40,7 +40,6 @@
   width: 100%;
   height: 3px;
   background-color: #EFB810;
-  margin-bottom: 14px !important;
 }
 .horario {
   padding-left: 17%;
@@ -91,7 +90,7 @@
 }
 
 .Size{
-  height:350px !important;
+  height:450px !important;
 }
 .window{
   display: flex;
@@ -100,20 +99,62 @@
   overflow: hidden;
 }
 .gridList {
-  width: 700px;
-  height: 350px;
+  width: 100%;
+  height: 450px;
+}
+.sizewindow{
+  height: calc(100vh - 83px);
+  width: 100%;
 }
 .Buttons{
-  display: flex;
-  flex-direction: column;
-  margin-left: 10rem;
-  margin-top: 4%;
-}
-.space{
-  margin-bottom: 1.5rem;
-  width: 150px;
-  margin-right:20px;
+  padding-left: 1.0rem;
+  padding-top: 0.3%;
+  width: 17em;
+  height:  calc(100vh - 83px);
+  background-color: #1b1c1d;
 }
 .justify{
-  width: 8%;
+  padding-top:1em !important;
+  padding-left: 4% !important;
+}
+.Data{
+  margin-top: 1em !important;
+  width: calc(100% + 60px)!important;
+  height:calc(100vh - 105px);
+  margin-left: 4% !important;
+  margin-bottom: 0% !important;
+  margin-right: 1.5em !important;
+}.Header-Comments{
+  width: 100%;
+}
+.Form-Comment{
+  height:100% !important;
+}
+.Align-Reply{
+  padding:10px;
+  vertical-align: bottom !important;
+  align-self: flex-end;
+  align-content: flex-end;
+  align-items: flex-end;
+}
+.Information-Container{
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  height:  calc(100vh - 285px);
+  padding-left: 1.0rem;
+  flex-direction: column;
+  border-color: rgba(241, 185, 17, 0.746);
+}
+.Column-Information{
+  display: flex;
+  flex-direction: column;
+  padding:10px;
+  margin-bottom:1.5px;
+  background-color: #272829da;
+  border-radius: 2%;
+  box-shadow: 0px 1px 4px 5px rgba(146, 145, 145, 0.28);
+}
+.MenuRow{
+  padding:0% !important;
 }

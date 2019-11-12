@@ -1,38 +1,41 @@
 import React, { Component }  from 'react';
 import Galery from '../Components/GaleryForm.js'
-import { Button} from 'semantic-ui-react'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
+import { Button, Menu,Segment} from 'semantic-ui-react'
 import '../semantic/semantic.min.css'
+import PageInf from './InformacionPage.js'
+import MenuRes from '../Components/Menu.js'
+import CommentGrid from '../Components/Comentarios.js'
 
-class Restaurant extends Component{
+export default class Restaurant extends Component{
     render(){
     return(
+       <div className="sizewindow">
+        <Row>
+        <Col xs={2} className="Buttons">
+            <MenuRes/>
+            <PageInf/>           
+        </Col>
+        <Col>
+        <Row>
+        <Col md={7} >
+        <div className="justify">
         <div className="d-flex row">
-        <div className="Buttons">
-        <div className= 'space'>
-        <Button className='ui inverted secondary button space'>
-            Reserva ya!
-        </Button>
-        </div>
-        <div className= 'space'>
-        <Button className='ui inverted secondary button space'>
-            Ver eventos
-        </Button>
-        </div>
-        <div className= 'space'>
-        <Button className='ui inverted secondary button space'>
-            Ver decoraciones
-        </Button>
-        </div>
-        <div className= 'space'>
-        <Button className='ui inverted secondary button space'>
-            Ver menú
-        </Button>
-        </div>
-        </div>
-        <div className="justify"></div>
         <Galery/>
+        </div>
+        </div>
+        </Col>
+        <Col md={4}>
+        <Segment className="Data">
+        <CommentGrid/>
+        </Segment>
+        </Col>
+        </Row>
+        </Col>
+        </Row>
         </div>
         )
     }
 }
-export default Restaurant;

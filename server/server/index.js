@@ -2,8 +2,7 @@ require('./config/config');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
-
+const fileUpload=require('express-fileupload');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
@@ -22,6 +21,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+app.use(fileUpload({createParentPath:true,useTempFiles:true}));
 //get methods
 app.get('/getCities',function(req,res){
     try{
@@ -57,6 +57,28 @@ app.get('/getRestaurant/:idRestaurant',function(req,res){
             dbo.collection("Restaurant").find(Query).toArray(function(err, result) {
                 if (err) throw err;
                 res.json({
+                    "Response":2,
+                    "Content":result
+                });
+                db.close();
+            });
+        });
+    }catch(err){
+        res.json({
+            "response":1
+        });
+    }
+});
+app.get('/getRestaurants',function(req,res){
+    try{
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
+        MongoClient.connect(url,{ useUnifiedTopology: true }, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("Restaurants");
+            dbo.collection("Restaurant").find({}).toArray(function(err, result) {
+                if (err) throw err;
+                res.status(200).json({
                     "Response":2,
                     "Content":result
                 });
@@ -406,8 +428,43 @@ app.post('/postRestaurant',function(req,res){
                 dbo.collection("Restaurant").insertOne(entries,function(err,res){
                     if (err) throw err;
                 });
-                res.end(JSON.stringify({Response:2}));
+                res.end(JSON.stringify({Response:(idn+1)}));
                 db.close();
+            });
+        });
+    }catch(err){
+        res.end(JSON.stringify({Response:0}));
+    }
+});
+app.post('/postPrueba',function(req,res){
+    var route='Imagenes/'
+    let file = req.files.archivo;
+    let fileName = file.name.split('.')[0];
+    if (!req.files || Object.keys(req.files).length === 0) { //si ningun archivo es detectado en la peticion que se envio
+        res.end(JSON.stringify({Response:1}));
+    }
+    try{
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
+        var idn=0;
+        MongoClient.connect(url,{ useUnifiedTopology: true }, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("Restaurants");
+            var mySort =  { _id:-1 };
+            dbo.collection("Images").find({},{projection: {_id:1}}).sort(mySort).toArray(function(err,result){
+                if (err) throw err;
+                idn=result.length+1;
+                idRestaurant=parseInt(req.body.restaurant_id,10);
+                route=route.concat(idn.toString(),'.jpeg');
+                entries={_id:idn,restaurant_id:idRestaurant,name:req.body.name,url:route};
+                file.mv(route, (err) => {
+                    if (err) throw err
+                    dbo.collection("Images").insertOne(entries,function(err,res){
+                        if (err) throw err;
+                    });
+                    res.end(JSON.stringify({Response:2}));
+                    db.close();
+                });
             });
         });
     }catch(err){
@@ -452,9 +509,9 @@ app.post('/postReview',function(req,res){
             dbo.collection("Cities").find({},{projection: {_id:1}}).sort(mySort).toArray(function(err,result){
                 if (err) throw err;
                 idn=result.length;
-                entries={_id:(idn+1),restaurant_id:parseInt(newReviewData.restaurant_id,10),user_id:parseInt(newReviewData.user_id,10),
+                entries={_id:(idn+1),restaurant_id:parseInt(newReviewData.restaurant_id,10),user_id:newReviewData.user_id,
                     puntuation:parseInt(newReviewData.puntuation,10),coment:newReviewData.coment};
-                dbo.collection("Cities").insertOne(entries,function(err,res){
+                dbo.collection("Comments").insertOne(entries,function(err,res){
                     if (err) throw err;
                 });
                 res.end(JSON.stringify({Response:2}));
@@ -475,9 +532,8 @@ app.post('/postAgreement',function(req,res){
             if (err) throw err;
             var dbo = db.db("Restaurants");
             var mySort =  { _id:-1 };
-            
             dbo.collection("Agreement").find({},{projection: {_id:1}}).sort(mySort).toArray(function(err,result){
-                if (err) throw idn=0;
+                if (err) throw err;
                 idn=result.length;
                 entries={_id:(idn+1),restaurant_id:parseInt(newAgreementData.restaurant_id,10),nameAgreement:newAgreementData.nameAgreement,
                     discount:parseInt(newAgreementData.discount,10),CutDate:newAgreementData.CutDate};

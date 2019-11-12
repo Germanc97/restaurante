@@ -42,7 +42,7 @@ import ResList from './ResList.js'
     ]
     }
     _fetchMovie(){
-        fetch('http://181.50.100.167:5000/getRestaurant/2')
+        fetch('http://181.50.100.167:8000/api/getActiveReservationsByRestaurantId/1')
         .then(res => res.json())
         .then(result => {
         const {Content=[]}=result
