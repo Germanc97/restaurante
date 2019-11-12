@@ -16,7 +16,7 @@ export default class Restaurant extends Component{
         <Row>
         <Col xs={2} className="Buttons">
             <MenuRes/>
-            <PageInf/>            
+            <PageInf/>           
         </Col>
         <Col>
         <Row>

@@ -9,6 +9,7 @@ const Conections=
     <Router>
         <App/>
         <Route exact path="/" component={Restaurant}/>
+        <Route path="/PerfilRes" component={Restaurant}/>
     </Router>;
 ReactDOM.render(Conections, document.getElementById('root'));
 

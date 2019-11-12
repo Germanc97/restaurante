@@ -1,14 +1,14 @@
 import React from 'react';
-import '../App.css'
+import '../App.css';
+import PropTypes from 'prop-types';
 import InformacionForm from '../Components/Informacion.js';
 class PageInf extends React.Component {
   state={
-    result:[
-      ]
+    result:[],
 }
 
-_fetchMovie(){
-fetch('http://181.50.100.167:5000/getRestaurant/2')
+_fetchMovie(id){
+fetch('http://181.50.100.167:5000/getRestaurant/'+id)
 .then(res => res.json())
 .then(result => {
   const {Content=[]}=result
@@ -18,7 +18,11 @@ fetch('http://181.50.100.167:5000/getRestaurant/2')
 }
 
 componentDidMount(){
-this._fetchMovie()
+  let url = window.location.href;
+  let urlSplit= url.split("?")
+  const id = urlSplit[1].split("=")[1];
+  console.log(id)
+  this._fetchMovie(id)
 }
     render() {
     return(

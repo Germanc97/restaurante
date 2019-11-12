@@ -11,8 +11,8 @@ class App extends Component {
       result: []
     }
   }
-  _fetchMovie(){
-  fetch('http://181.50.100.167:5000/getRestaurantPuntuation/1')
+  _fetchMovie(id){
+  fetch('http://181.50.100.167:5000/getRestaurantPuntuation/'+id)
   .then(res => res.json())
   .then(result => {
     const {Content=[]}=result
@@ -23,7 +23,11 @@ class App extends Component {
   }
 
   componentDidMount(){
-  this._fetchMovie()
+    let url = window.location.href;
+    let urlSplit= url.split("?")
+    const id = urlSplit[1].split("=")[1];
+    console.log(id)
+    this._fetchMovie(id)
   }
   render(){
   return (
