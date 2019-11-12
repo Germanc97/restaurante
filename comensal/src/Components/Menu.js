@@ -1,12 +1,6 @@
 import React, { Component }  from 'react';
-import Galery from '../Components/GaleryForm.js'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import Container from 'react-bootstrap/Container'
 import { Button, Menu,Segment} from 'semantic-ui-react'
 import '../semantic/semantic.min.css'
-import PageInf from './InformacionPage.js'
-import CommentGrid from '../Components/Comentarios.js'
 
 export default class MenuRes extends Component {
     state = { activeItem: 'home' }
