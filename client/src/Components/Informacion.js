@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import '../App.css';
 import PropTypes from 'prop-types'
 import '../semantic/semantic.min.css'
-import { Segment, Form } from 'semantic-ui-react'
+import { Segment, Form, Confirm, Modal, Button} from 'semantic-ui-react'
 import Error from '../ImgSrc/ErrorServer.png'
+import { Redirect } from 'react-router-dom'
+
 console.log(PropTypes)
 class InformacionForm extends Component {
   PropTypes ={
@@ -17,8 +19,14 @@ class InformacionForm extends Component {
     telephone: "",
     email: "",
     address: "",
-    schedule: ""
+    schedule: "",
+    open: false
   }
+
+  open = () => this.setState({open: true})
+
+  close = () => this.setState({open: false})
+
   handleChangeName = (e) => {
     e.preventDefault()
     console.log(e.target.value)
@@ -66,6 +74,7 @@ class InformacionForm extends Component {
       description: e.target.value
     });
   }
+
   _handleSubmit=(e)=>{
       var name1 = this.state.name
       var description1 = this.state.description
@@ -99,6 +108,13 @@ class InformacionForm extends Component {
           };
       })
       .catch(err => console.log("Se presentó un error"));
+      this.setState({
+        open: false
+      });
+  }
+
+  handleClose=()=>{
+    window.location.reload();
   }
 
 render(){
@@ -107,7 +123,7 @@ render(){
   if(Content.length === 0){
     console.log(Content)
     return <div>
-      <img src={Error} alt='Vale shit'/>
+      <img src={Error} className="ImgErrorNoButton" alt='Error! Imagen No cargada'/>
     </div>
   ;}else{
       console.log("eNTRE EN ELSE")
@@ -116,8 +132,8 @@ render(){
         return(
             <div key={User._id}>           
             <Segment className="PantallaNoButton">
-            <Form onSubmit={this._handleSubmit}>    
-            <div className="container">
+            <Form >    
+            <div className="container" >
                       <div className="row">
                           <div className="col-6 ">                     
                                   <div className="field">
@@ -125,7 +141,7 @@ render(){
                                   Nombre:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.name ||"Nombre restaurante"} onChange={this.handleChangeName}></input>
+                                  <input type="text" placeholder={User.name } onChange={this.handleChangeName}></input>
                                   </div>
                                   </div>
                                   <br/>
@@ -134,7 +150,7 @@ render(){
                                   Dirección:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.address ||"Ingresa la dirección"} onChange={this.handleChangeAddress}></input>
+                                  <input type="text" placeholder={User.address } onChange={this.handleChangeAddress}></input>
                                   </div>
                                   </div>
                                   <br/>
@@ -143,7 +159,7 @@ render(){
                                   Telefono:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.telephone ||"Ingresa el telefono"} onChange={this.handleChangeTelephone}></input>
+                                  <input type="text" placeholder={User.telephone } onChange={this.handleChangeTelephone}></input>
                                   </div>
                                   </div>
                           </div>
@@ -153,7 +169,7 @@ render(){
                                   Correo:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.email ||"Nombre restaurante"} onChange={this.handleChangeEmail}></input>
+                                  <input type="text" placeholder={User.email } onChange={this.handleChangeEmail}></input>
                                   </div>
                                   </div>
                                   <br/>
@@ -162,7 +178,7 @@ render(){
                                   Horario:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.schedule ||"ej. Lun - Dom 10:00AM - 12:00AM"} onChange={this.handleChangeSchedule}></input>
+                                  <input type="text" placeholder={User.schedule } onChange={this.handleChangeSchedule}></input>
                                   </div>
                                   </div>
                                   <br/>
@@ -170,19 +186,35 @@ render(){
                                 <label>
                                 Descripción:
                                 </label>
-                                <div className="ui left textarea"><textarea placeholder={User.description || "Cuentanos de ti"} rows="3" onChange={this.handleChangeDescription}></textarea></div>
+                                <div className="ui left textarea"><textarea placeholder={User.description } rows="3" onChange={this.handleChangeDescription}></textarea></div>
                                 </div>
                                 <br/>
                           </div>
                         </div>
                     </div>
-                    <div className="form-row justify-content-end align-items-end">           
-                    <button className="ui inverted secondary button" type="submit">Aceptar</button>
-                    <button className="ui inverted secondary button">Cancelar</button>
-                    </div>
+                    <div className="form-row justify-content-end align-items-end">                              
+                    <button className="ui inverted secondary button" onClick={this.handleClose}>Cancelar</button> 
+                    <button className="ui inverted secondary button" onClick={this.open}>Aceptar</button>                  
+                    </div>                  
                     </Form>
-                    </Segment>               
-                    </div>     
+                    </Segment>                                                     
+                      <Modal className="confirm" open={this.state.open} onClose={this.close} >
+                        <Modal.Header>Modificar información Restaurante</Modal.Header>
+                        <Modal.Content>
+                          <p>¿ Está seguro(a) de editar la información del Restaurante ?</p>
+                        </Modal.Content>
+                        <Modal.Actions>
+                          <Button onClick={this.close} negative>No</Button>
+                          <Button
+                            positive
+                            icon='checkmark'
+                            labelPosition='right'
+                            content='Yes'
+                            onClick={this._handleSubmit}
+                          />
+                        </Modal.Actions>
+                      </Modal>
+                    </div>
             )
          })          
          );

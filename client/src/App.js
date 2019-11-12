@@ -51,15 +51,17 @@ class App extends Component {
   }
 }
 export default App;
+
+
+
 class Menum extends Component {
-  state = { activeItem: 'Información' }
+  state = { activeItem: '' || this.state }
   handleItemClick = (e, { name }) => {
     return this.setState({ activeItem: name });
   };
 
   render() {
     const { activeItem } = this.state
-
     return (
         <Menu inverted pointing secondary>
           <Menu.Item as={ Link } name='Información' to ="/"

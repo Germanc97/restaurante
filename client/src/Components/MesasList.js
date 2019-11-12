@@ -13,13 +13,9 @@ class MesasList extends Component {
         Content.map(file =>{
         return(
               <Table.Row>
-                <Table.Cell>{file.title}</Table.Cell>
-                <Table.Cell>{file.capacity}</Table.Cell>
-                <Table.Cell textAlign='right'>
-                <Button className="info" circular inverted secondary icon='delete' />
-                </Table.Cell>
+                <Table.Cell>{"Mesa " +file.idTableRest}</Table.Cell>
+                <Table.Cell>{file.numberChairs}</Table.Cell>
               </Table.Row>
-        )}))
-    
+        )}))   
     }}
 export default MesasList;

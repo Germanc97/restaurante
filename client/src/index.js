@@ -13,6 +13,7 @@ const Conections=
     <Router>
         <App/>
         <Route exact path="/" component={InformacionPage}/>
+        <Route exact path="/Info" component={InformacionPage}/>
         <Route path="/Galeria" component={galeria} />
         <Route path="/Mesas" component={Mesas} />
         <Route path="/Reservas" component={Reservas}/>

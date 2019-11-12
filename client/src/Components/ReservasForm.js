@@ -6,20 +6,24 @@ import ResList from './ResList.js'
 
  class CardsRes extends Component {
   state={
-        result:[]
+        result:[1]
     }
-    _fetchMovie(){
-        fetch('http://181.50.100.167:8000/api/getActiveReservationsByRestaurantId/1')
+    _fetchMovie(id){
+        fetch('http://181.50.100.167:8000/api/getActiveReservationsByRestaurantId/'+id)
         .then(res => res.json())
         .then(result => {
-        const {Content=[]}=result
+          const {Content=[]}=result
         this.setState({result : Content})
         //console.log(this.state.result);
         })        
     }
 
     componentDidMount(){
-    this._fetchMovie()
+      let url = window.location.href;
+      let urlSplit = url.split("?")
+      const id = urlSplit[1].split("=")[1];
+      console.log(id)
+      this._fetchMovie(id)
     }
    render(){
     
