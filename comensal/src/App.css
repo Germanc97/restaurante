@@ -107,9 +107,9 @@
   width: 100%;
 }
 .Buttons{
-  padding-left: 1.0rem;
+  padding-left: 0.5rem;
   padding-top: 0.3%;
-  width: 17em;
+  margin-right: 0% !important;
   height:  calc(100vh - 83px);
   background-color: #1b1c1d;
 }
@@ -119,11 +119,11 @@
 }
 .Data{
   margin-top: 1em !important;
-  width: calc(100% + 60px)!important;
+  width: calc(100% + 90px)!important;
   height:calc(100vh - 105px);
   margin-left: 4% !important;
   margin-bottom: 0% !important;
-  margin-right: 1.5em !important;
+  margin-right: 0.5em !important;
 }.Header-Comments{
   width: 100%;
 }
@@ -141,8 +141,9 @@
   color: white;
   display: flex;
   justify-content: flex-end;
-  height:  calc(100vh - 285px);
-  padding-left: 1.0rem;
+  height:  calc(100vh - 200px);
+  padding-left: 1.5em;
+  margin-right: 3%;
   flex-direction: column;
   border-color: rgba(241, 185, 17, 0.746);
 }
@@ -150,11 +151,61 @@
   display: flex;
   flex-direction: column;
   padding:10px;
+  word-break: break-all; 
+  hyphens: auto;
   margin-bottom:1.5px;
   background-color: #272829da;
   border-radius: 2%;
   box-shadow: 0px 1px 4px 5px rgba(146, 145, 145, 0.28);
 }
+.Restaurant-Header{
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
 .MenuRow{
   padding:0% !important;
+}
+.Comments-Grid{
+  height: calc(100vh - 330px);
+}
+.Comments-Error{
+  height: calc(100vh - 365px);
+  padding-top: 50%;
+  color: rgba(153, 153, 153, 0.76);
+  font-weight: 500;
+  font-size: 20px;
+}
+.Error-Logo{
+  height: 500px;
+  width: 500px; 
+  margin-left: 30%;
+  margin-bottom: 0% !important;
+}
+.Error-Page{
+  background-color: #1b1c1d;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  width: 100%;
+  height: 85%;
+  margin-bottom: 0% !important;
+}
+.Error-Link{
+  padding-left: 34%;
+  margin-bottom: 0% !important;
+  margin-top: 0% !important;
+  background-color: #1b1c1d;
+  align-items: center;
+  align-content: center;
+  display: flex;
+  text-align: center;
+  width: 100%;
+  height: 15%;
+}
+.Link{
+  color:white;
+  
+}
+Link:hover {
+  color: rgba(241, 185, 17, 0.746) !important;
 }

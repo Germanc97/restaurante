@@ -32,10 +32,10 @@ class InformacionForm extends Component {
                             <label style={{fontSize: '17px'}}>
                             {User.telephone ||"Telefono"}
                             </label>
-                            <label className="font-weight-bold" style={{fontSize: '18px'}}>
+                            <label className="font-weight-bold d-flex flex-wrap" style={{fontSize: '18px'}}>
                             Correo:
                             </label>
-                            <label style={{fontSize: '17px'}}>
+                            <label className="d-flex flex-wrap" style={{fontSize: '17px'}}>
                             {User.email ||"Email"}
                             </label>
                           <label className="font-weight-bold" style={{fontSize: '18px'}}>
