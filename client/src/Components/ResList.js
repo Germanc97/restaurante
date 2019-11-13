@@ -68,12 +68,12 @@ class ResList extends Component {
                           <p>¿ Está seguro(a) que desea eliminar la reserva ?</p>
                         </Modal.Content>
                         <Modal.Actions>
-                          <Button onClick={this.close} negative>No</Button>
+                          <Button onClick={this.close} negative>Cancelar</Button>
                           <Button
                             positive
                             icon='checkmark'
                             labelPosition='right'
-                            content='Yes'
+                            content='Eliminar'
                             onClick={() => this.handleDeleteReservation(file.PK_idReservation)} 
                           />
                         </Modal.Actions>

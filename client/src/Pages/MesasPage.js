@@ -14,6 +14,7 @@ class Mesas extends Component {
     numberChairs:"",
     AddTable: false
   }
+  
   componentDidMount(){
     let url = window.location.href;
     let urlSplit = url.split("?")
@@ -43,9 +44,9 @@ class Mesas extends Component {
       var params = {
         FK_idRestaurant: parseInt(this.state.id),
         idTableRest: idTableRest1,
-        numberChairs: numberChairs1,
+        numberChairs: numberChairs1
       }
-      console.log(params)
+      console.log(JSON.stringify(params))
       var request = {
         method: 'POST',
         body : JSON.stringify(params)
@@ -62,8 +63,6 @@ class Mesas extends Component {
         open: false
       });
   }
-
-
     open = () => this.setState({AddTable: true})
 
     close = () => this.setState({AddTable: false})
