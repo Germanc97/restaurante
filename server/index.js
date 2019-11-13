@@ -487,7 +487,9 @@ app.post('/postPrueba',function(req,res){
                 idn=result.length+1;
                 idRestaurant=parseInt(req.body.restaurant_id,10);
                 route=route.concat(idn.toString(),'.jpeg');
-                entries={_id:idn,restaurant_id:idRestaurant,name:req.body.name,url:route};
+                var route1='http://181.50.100.167:5000/static/'
+                route1=route1.concat(idn.toString(),'.jpeg')
+                entries={_id:idn,restaurant_id:idRestaurant,name:req.body.name,url:route1};
                 file.mv(route, (err) => {
                     if (err) throw err
                     dbo.collection("Images").insertOne(entries,function(err,res){
