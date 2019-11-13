@@ -3,13 +3,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const fileUpload=require('express-fileupload');
+const request = require('request');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 //setting control for the correct use of APIs
 //esta es una prueba de cambio
-app.use('/static', express.static(__dirname));
+app.use('/static', express.static(__dirname + '/files'));
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -42,6 +43,25 @@ app.get('/getCities',function(req,res){
             });
         });
     }catch(err){
+        res.json({
+            "response":1
+        });
+    }
+});
+app.get('/getper',function(req,res){
+    try{
+        request.get('http://181.50.100.167:4000/getNameUser?id=2',function(err,response,body){
+            if (err) throw err;
+            if(JSON.parse(body).response===2){
+                console.log(JSON.parse(body).content.name);
+            }
+            res.status(200).json({
+                "Response":2
+            });
+        })
+        
+    }catch(err){
+        console.log(err);
         res.json({
             "response":1
         });
@@ -106,7 +126,7 @@ app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
             dbo.collection("Restaurant").find(Query,Query2).toArray(function(err, result) {
                 if (err) throw err;
                 var restaurantName=result[0].name
-                var entries = [{$match: { "restaurant_id": { $eq:1}}},{$group: {_id:null, AvgPuntuation: {$avg:"$puntuation"}}},{ $project : { _id:0}}];
+                var entries = [{$match: { "restaurant_id": { $eq:parseInt(idn,10)}}},{$group: {_id:null, AvgPuntuation: {$avg:"$puntuation"}}},{ $project : { _id:0}}];
                 dbo.collection("Comments").aggregate(entries).toArray(function(err, result) {
                     if (err) throw err;
                     var value=0;
@@ -240,7 +260,15 @@ app.get('/getReviewsxRestaurant/:idRestaurant',function(req,res){
             var dbo = db.db("Restaurants");
             var query =  { restaurant_id : parseInt(idn,10) };
             var mySort =  { _id:-1 };
-            dbo.collection("Comments").find(query).sort(mySort).toArray(function(err, result) {
+            var entries=[{$match: { "restaurant_id": { $eq:parseInt(idn,10)}}},{ $lookup:
+                {
+                  from: 'users',
+                  localField: 'autor_id',
+                  foreignField: 'id',
+                  as: 'autor'
+                }
+              }];
+            dbo.collection("Comments").aggregate(entries).sort(mySort).toArray(function(err, result) {
                 if (err) throw err;
                 res.status(200).json({
                     "Response":2,
@@ -440,7 +468,7 @@ app.post('/postRestaurant',function(req,res){
     }
 });
 app.post('/postPrueba',function(req,res){
-    var route='Imagenes/'
+    var route='server/files/';
     let file = req.files.archivo;
     let fileName = file.name.split('.')[0];
     if (!req.files || Object.keys(req.files).length === 0) { //si ningun archivo es detectado en la peticion que se envio
