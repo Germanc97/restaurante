@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //setting control for the correct use of APIs
 //esta es una prueba de cambio
-app.use('/static', express.static('Imagenes'));
+app.use('/static', express.static(__dirname));
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,11 +25,6 @@ app.use(function (req, res, next) {
 });
 app.use(fileUpload({createParentPath:true,useTempFiles:true}));
 //get methods
-app.get('/getCanada',function(req,res){
-    res.json({
-        "response":__dirname
-    });
-});
 app.get('/getCities',function(req,res){
     try{
         var MongoClient = require('mongodb').MongoClient;
@@ -244,7 +239,8 @@ app.get('/getReviewsxRestaurant/:idRestaurant',function(req,res){
             if (err) throw err;
             var dbo = db.db("Restaurants");
             var query =  { restaurant_id : parseInt(idn,10) };
-            dbo.collection("Comments").find(query).toArray(function(err, result) {
+            var mySort =  { _id:-1 };
+            dbo.collection("Comments").find(query).sort(mySort).toArray(function(err, result) {
                 if (err) throw err;
                 res.status(200).json({
                     "Response":2,
