@@ -106,3 +106,25 @@
   width: 100%;
   height: calc(100vh - 190px);
 }
+.confirm{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 200px;
+}
+.waiting{
+  height: calc(100vh - 236px);
+  width: 100%;
+  vertical-align: middle;
+}
+.bloc{
+    display: inline;
+}
+.createtable{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 350px;
+}

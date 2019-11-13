@@ -10,9 +10,15 @@ class ComentariosForm extends React.Component {
     }
    render(){
     const {Content} = this.props
-    if(Content.length === 0){
-        return <img src={Error} className="ImgErrorNoButton" alt='Vale shit'/>;
-      }else{
+    if (Content.length === 0){
+        console.log('1')
+      return <img src={Error} className="ImgErrorButton" alt='Vale shit'/>;
+    }else if (Content[0]=== 1){
+      console.log('2')       
+      return <div className="waiting"> 
+              <div className="ui active centered inline loader loader "></div>
+             </div>
+    }else{
     return(
         <Card.Group centered className="center"  itemsPerRow={1}>
             {Content.map((data, i) => (

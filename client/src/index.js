@@ -17,7 +17,6 @@ const Conections=
         <Route path="/Mesas" component={Mesas} />
         <Route path="/Reservas" component={Reservas}/>
         <Route path="/Comentarios" component={ComentariosPages}/> 
-        <Route path="/Eventos" component={Redirect} loc="181.50.100.167:4001/Events"/>
     </Router>;
 ReactDOM.render(Conections, document.getElementById('root'));
 
