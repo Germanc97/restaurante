@@ -109,6 +109,7 @@
 .Buttons{
   padding-left: 0.5rem;
   padding-top: 0.3%;
+  min-width: 220px;
   margin-right: 0% !important;
   height:  calc(100vh - 83px);
   background-color: #1b1c1d;
@@ -166,7 +167,7 @@
   padding:0% !important;
 }
 .Comments-Grid{
-  height: calc(100vh - 323px);
+  height: calc(100vh - 330px);
 }
 .Comments-Error{
   height: calc(100vh - 365px);
