@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import Media from 'react-bootstrap/Media'
-import { Button, Comment, Form, Header, TextArea, Rating} from 'semantic-ui-react'
+import { Comment, Form, Header, TextArea, Rating} from 'semantic-ui-react'
 import '../App.css'
 import Avatar from '../ImgSrc/Avatar.png'
 class CommentGrid extends Component{
   constructor(props) {
     super(props)
     this.state = {
-      result: []
+      result: [],
+      rating: 0
     }
   }
   _fetchMovie(id){
@@ -16,11 +16,11 @@ class CommentGrid extends Component{
   .then(result => {
     const {Content=[]}=result
     this.setState({result : Content})
-    console.log(this.state.result);
   }) 
   //.catch(console.log)     
   }
-
+  handleRate = (e, { rating}) =>
+    this.setState({ rating });
   componentDidMount(){
     try {
       let url = window.location.href;
@@ -28,11 +28,12 @@ class CommentGrid extends Component{
       const id = urlSplit[1].split("=")[1];
       this._fetchMovie(id);
     } catch(e) {
-      console.log('catch e', e);
+      console.log('catch e');
     }
     
   }
   render(){
+    console.log(this.state.result)
     if(this.state.result.length !==0){
     return(
       <Comment.Group size='large' className="Form-Comment">
@@ -44,7 +45,9 @@ class CommentGrid extends Component{
           <Comment  key={i}>
           <Comment.Avatar src={Avatar}/>
           <Comment.Content>
-            <Comment.Author as='a'>{data.autor_id}</Comment.Author>
+          {data.autor.map((data, i) => (
+            <Comment.Author as='a' key={i}>{data.userName}</Comment.Author>
+            ))}
             <Comment.Metadata>
             <Rating icon='star' defaultRating={data.puntuation} maxRating={5} size='tiny' disabled/>
             </Comment.Metadata>
@@ -55,7 +58,7 @@ class CommentGrid extends Component{
         </div>
         <Form className="ui reply form">
         <div className="Align-Reply">
-        <Rating icon='star' defaultRating={0} maxRating={5} size='huge'/>
+        <Rating icon='star' defaultRating={0} maxRating={5} size='huge' onRate={this.handleRate}/>
         <TextArea placeholder='Agrega tu comentario aquí!' rows={1} style={{
         width: "100%",
         height: "10vh",
@@ -77,7 +80,7 @@ class CommentGrid extends Component{
         <div className="Comments-Error text-center">Aún no hay comentarios</div>
         <Form className="ui reply form">
         <div className="Align-Reply">
-        <Rating icon='star' defaultRating={0} maxRating={5} size='huge'/>
+        <Rating icon='star' defaultRating={0} maxRating={5} size='huge' onRate={this.handleRate}/>
         <TextArea placeholder='Agrega tu comentario aquí!' rows={1} style={{
         width: "100%",
         height: "10vh",

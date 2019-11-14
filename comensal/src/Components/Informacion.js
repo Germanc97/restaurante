@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 import PropTypes from 'prop-types'
 import '../semantic/semantic.min.css'
 

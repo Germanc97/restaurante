@@ -11,14 +11,14 @@
 .Menu {
   display: flex;
   flex-direction: row;
-  width: 90%;
+  width: 200%;
 }
 .columna {
   padding-left:50px,
 }
 .LogOut {
   margin-Top: 20px;
-  margin-left: 20px;
+  margin-left: 10px;
   float: right;
   align-Content: center;
 }
@@ -166,7 +166,7 @@
   padding:0% !important;
 }
 .Comments-Grid{
-  height: calc(100vh - 330px);
+  height: calc(100vh - 323px);
 }
 .Comments-Error{
   height: calc(100vh - 365px);

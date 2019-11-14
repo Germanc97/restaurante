@@ -2,8 +2,7 @@ import React, { Component }  from 'react';
 import Galery from '../Components/GaleryForm.js'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import Container from 'react-bootstrap/Container'
-import { Button, Menu,Segment,Rating} from 'semantic-ui-react'
+import { Segment,Rating} from 'semantic-ui-react'
 import '../semantic/semantic.min.css'
 import PageInf from './InformacionPage.js'
 import MenuRes from '../Components/Menu.js'
@@ -31,9 +30,7 @@ export default class Restaurant extends Component{
         try {
           let url = window.location.href;
           let urlSplit= url.split("?")
-          console.log(urlSplit)
           const id = urlSplit[1].split("=")[1];
-          const User =urlSplit[2].split("=")[1];
           this._fetchMovie(id);
         } catch(e) {
           this.setState({ hasError: true });
@@ -41,7 +38,7 @@ export default class Restaurant extends Component{
       }
     render(){
       if (this.state.hasError) {
-        return <h1 className="Error-Link"><a href={'http://181.50.100.167:9000/login/'} className="Link">Click Aqui! Intentalo de nuevo</a></h1>;
+        return <h1 className="Error-Link"><a href={'http://159.65.58.193:3000/signup/'} className="Link">Click Aqui! Intentalo de nuevo</a></h1>;
       }else{
     return(
        <div className="sizewindow">
