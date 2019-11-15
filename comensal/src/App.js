@@ -39,6 +39,7 @@ class App extends Component {
       let url = window.location.href;
       let urlSplit= url.split("?")
       const id =urlSplit[1].split("=")[1];
+      console.log(id)
       if(urlSplit.length===3){
         const User =urlSplit[2].split("=")[1];
         this._fetchValidate(User);
