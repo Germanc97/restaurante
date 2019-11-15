@@ -128,3 +128,8 @@
   transform: translate(-50%, -50%);
   height: 350px;
 }
+.toast{
+  width: 300px; 
+  color: white !important;
+  font-size: 15px;
+}

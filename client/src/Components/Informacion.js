@@ -5,8 +5,8 @@ import '../semantic/semantic.min.css'
 import { Segment, Form, Confirm, Modal, Button} from 'semantic-ui-react'
 import Error from '../ImgSrc/ErrorServer.png'
 import { Redirect } from 'react-router-dom'
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
-console.log(PropTypes)
 class InformacionForm extends Component {
   PropTypes ={
     Content: PropTypes.array
@@ -105,18 +105,24 @@ class InformacionForm extends Component {
           console.log(response.status)
           if (response.status == "200") {
               console.log("se escribió con exito")
+              this.handleClose()
+              this.handleOpenToast()
+
           };
       })
       .catch(err => console.log("Se presentó un error"));
-      this.setState({
-        open: false
-      });
+  }
+
+  handleOpenToast=()=>{
+    ToastsStore.success("Actualizado correctamente")
   }
 
   handleClose=()=>{
-    window.location.reload();
+        window.setTimeout(function(){
+          window.location.reload();  
+      }, 1000);
   }
-
+  
 render(){
     const {Content} = this.props
     console.log("Ya estas en Informacion.js")
@@ -141,7 +147,7 @@ render(){
                                   Nombre:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.name } onChange={this.handleChangeName}></input>
+                                  <input type="text" defaultValue={User.name } onChange={this.handleChangeName}></input>
                                   </div>
                                   </div>
                                   <br/>
@@ -150,7 +156,7 @@ render(){
                                   Dirección:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.address } onChange={this.handleChangeAddress}></input>
+                                  <input type="text" defaultValue={User.address } onChange={this.handleChangeAddress}></input>
                                   </div>
                                   </div>
                                   <br/>
@@ -159,7 +165,7 @@ render(){
                                   Telefono:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.telephone } onChange={this.handleChangeTelephone}></input>
+                                  <input type="text" defaultValue={User.telephone } onChange={this.handleChangeTelephone}></input>
                                   </div>
                                   </div>
                           </div>
@@ -169,7 +175,7 @@ render(){
                                   Correo:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.email } onChange={this.handleChangeEmail}></input>
+                                  <input type="text" defaultValue={User.email } onChange={this.handleChangeEmail}></input>
                                   </div>
                                   </div>
                                   <br/>
@@ -178,7 +184,7 @@ render(){
                                   Horario:
                                   </label>
                                   <div className="ui left input">
-                                  <input type="text" placeholder={User.schedule } onChange={this.handleChangeSchedule}></input>
+                                  <input type="text" defaultValue={User.schedule } onChange={this.handleChangeSchedule}></input>
                                   </div>
                                   </div>
                                   <br/>
@@ -186,7 +192,7 @@ render(){
                                 <label>
                                 Descripción:
                                 </label>
-                                <div className="ui left textarea"><textarea placeholder={User.description } rows="3" onChange={this.handleChangeDescription}></textarea></div>
+                                <div className="ui left textarea"><textarea defaultValue={User.description } rows="3" onChange={this.handleChangeDescription}></textarea></div>
                                 </div>
                                 <br/>
                           </div>
@@ -198,22 +204,30 @@ render(){
                     </div>                  
                     </Form>
                     </Segment>                                                     
-                      <Modal className="confirm" open={this.state.open} onClose={this.close} >
-                        <Modal.Header>Modificar información Restaurante</Modal.Header>
-                        <Modal.Content>
-                          <p>¿ Está seguro(a) de editar la información del Restaurante ?</p>
-                        </Modal.Content>
-                        <Modal.Actions>
-                          <Button onClick={this.close} negative>No</Button>
-                          <Button
-                            positive
-                            icon='checkmark'
-                            labelPosition='right'
-                            content='Yes'
-                            onClick={this._handleSubmit}
-                          />
-                        </Modal.Actions>
-                      </Modal>
+                      <form action={'http://181.50.100.167:3000/?id=' + this.props.Content[0]._id}>
+                        <Modal className="confirm" open={this.state.open} onClose={this.close} >
+                          <Modal.Header>Modificar información Restaurante</Modal.Header>
+                          <Modal.Content>
+                            <p>¿ Está seguro(a) de editar la información del Restaurante ?</p>
+                          </Modal.Content>
+                          <Modal.Actions>
+                            <Button onClick={this.close} negative>Cancelar</Button>
+                            <Button
+                              positive
+                              icon='checkmark'
+                              labelPosition='right'
+                              content='Actualizar'
+                              onClick={this._handleSubmit}
+                            />
+                            <ToastsContainer
+                            style='toast'
+                            store={ToastsStore} 
+                            position={ToastsContainerPosition.TOP_RIGHT}
+                            preventDuplicates={true}                           
+                            />
+                          </Modal.Actions>
+                        </Modal>
+                      </form>
                     </div>
             )
          })          
