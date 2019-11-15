@@ -1,6 +1,5 @@
 import React from 'react';
 import '../App.css';
-import PropTypes from 'prop-types';
 import InformacionForm from '../Components/Informacion.js';
 class PageInf extends React.Component {
   state={
@@ -18,11 +17,14 @@ fetch('http://181.50.100.167:5000/getRestaurant/'+id)
 }
 
 componentDidMount(){
-  let url = window.location.href;
-  let urlSplit= url.split("?")
-  const id = urlSplit[1].split("=")[1];
-  console.log(id)
-  this._fetchMovie(id)
+  try {
+    let url = window.location.href;
+    let urlSplit= url.split("?")
+    const id = urlSplit[1].split("=")[1];
+    this._fetchMovie(id);
+  } catch(e) {
+    console.log('catch e', e);
+  }
 }
     render() {
     return(
