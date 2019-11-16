@@ -13,10 +13,20 @@ services:
     backend:
         container_name: mod_restaurante_server
         build:
-            context: ./server
+            context: ./server/server
             dockerfile: Dockerfile
         image: restaurante/mod_restaurante_server
         ports:
             - "5000:5000"
         volumes:
             - ./server:/usr/src/app
+    comensal:
+        container_name: mod_restaurante_comensal
+        build:
+            context: ./comensal
+            dockerfile: Dockerfile
+        image: restaurante/mod_restaurante_comensal
+        ports:
+            - "3010:3000"
+        volumes:
+            - ./comensal:/usr/src/app
