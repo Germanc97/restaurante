@@ -13,7 +13,7 @@ services:
     backend:
         container_name: mod_restaurante_server
         build:
-            context: ./server/server
+            context: ./server
             dockerfile: Dockerfile
         image: restaurante/mod_restaurante_server
         ports:
