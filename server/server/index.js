@@ -106,7 +106,12 @@ app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
             Query2 = {projection: {name:1}};
             dbo.collection("Restaurant").find(Query,Query2).toArray(function(err, result) {
                 if (err) throw err;
-                if (result.length===0) throw err;
+                if (result.length===0){
+                    res.status(404).json({
+                        "Response":1
+                    });
+                    db.close();
+                };
                 var restaurantName=result[0].name
                 var entries = [{$match: { "restaurant_id": { $eq:parseInt(idn,10)}}},{$group: {_id:null, AvgPuntuation: {$avg:"$puntuation"}}},{ $project : { _id:0}}];
                 dbo.collection("Comments").aggregate(entries).toArray(function(err, result) {
