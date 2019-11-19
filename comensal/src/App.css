@@ -1,6 +1,7 @@
 
 .App-logo {
   height: 90px;
+  width: 80px;
   margin-right: 10px;
   margin-left: 20px;
   padding-bottom: 15px;
@@ -11,20 +12,21 @@
 .Menu {
   display: flex;
   flex-direction: row;
-  width: 200%;
+  width: 100%;
 }
 .columna {
   padding-left:50px,
 }
 .LogOut {
-  margin-Top: 20px;
-  margin-left: 10px;
   float: right;
+  margin-right: 3px;
+  margin-left: 3px;
   align-Content: center;
+  cursor:pointer;
 }
 .UserInformation {
-  flex-direction: column;
-  margin-top: 18px;
+  flex-direction: row;
+  margin-top: 30px;
   display: flex;
   color: white;
   text-align: center;
@@ -111,20 +113,20 @@
 .Buttons{
   padding-left: 0.5rem;
   padding-top: 0.3%;
-  min-width: 220px;
+  min-width: 278px;
   margin-right: 0% !important;
   height:  calc(100vh - 83px);
   background-color: #1b1c1d;
 }
 .justify{
   padding-top:1em !important;
-  padding-left: 4% !important;
+  padding-left: 2% !important;
 }
 .Data{
   margin-top: 1em !important;
-  width: calc(100% + 75px)!important;
+  width: calc(100% + 40px)!important;
   height:calc(100vh - 105px);
-  margin-left: 4% !important;
+  margin-left: 2% !important;
   margin-bottom: 0% !important;
   margin-right: 0.5em !important;
 }.Header-Comments{
@@ -169,7 +171,7 @@
   padding:0% !important;
 }
 .Comments-Grid{
-  height: calc(100vh - 330px);
+  height: 56%;
 }
 .Comments-Error{
   height: calc(100vh - 365px);
@@ -211,4 +213,8 @@
 }
 Link:hover {
   color: rgba(241, 185, 17, 0.746) !important;
+}
+
+.LoaderGalery{
+  background-color: #1b1c1d;
 }

@@ -1,73 +1,65 @@
 import React, { Component}  from 'react';
 import '../semantic/semantic.min.css'
-import ham from '../ImgSrc/Ham.jpeg'
-import pasta from '../ImgSrc/Pasta.jpg'
-import pizza from '../ImgSrc/pizza.jpg'
+import Noimg from '../ImgSrc/NoImg.png'
 import '../App.css'
 import Carousel from 'react-bootstrap/Carousel'
  class Galery extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      result:[
-        {
-         _id: 1,
-         img: ham,
-         title: 'Hamvorguesa',
-       },
-       {
-        _id: 2,
-        img: pizza,
-        title: 'Pizza',
-       },
-       {
-        _id: 3,
-        img: ham,
-        title: 'Pasta',
-       },
-       {
-        _id: 4,
-        img: pizza,
-        title: 'Pasta',
-       },
-       {
-        _id: 5,
-        img: ham,
-        title: 'Pasta',
-       },
-       {
-        _id: 6,
-        img: pizza,
-        title: 'Pizza',
-       },
-       {
-        _id: 7,
-        img: ham,
-        title: 'Pizza',
-       },
-       {
-        _id: 8,
-        img: pasta,
-        title: 'Pasta',
-       },
-  
-     ]
+      result:[0],
+      hasError: false,
     }
   }
+  _fetchImages(id){
+    fetch('http://181.50.100.167:5000/getImagesxRestaurant/'+id)
+    .then(res => res.json())
+    .then(result => {
+      const {Content=[]}=result
+      this.setState({result : Content})
+    }) 
+    //.catch(console.log)     
+    }
+  componentDidMount(){
+    try {
+      let url = window.location.href;
+      let urlSplit= url.split("?")
+      const id = urlSplit[1].split("=")[1];
+      this._fetchImages(id);
+    } catch(e) {
+      this.setState({ hasError: true });
+    }
+  }
+
    render(){ 
+     console.log(this.state.result)
+     if(this.state.hasError){
+       console.log("Error")
+     }else if(this.state.result.length !==0 && this.state.result[0]!==0){
      return(
       <Carousel className="gridList">
         {this.state.result.map((data,i)=>(         
         <Carousel.Item key={i}>
             <img
             className="d-block w-100 img-thumbnail Size"
-            src={data.img}
+            src={data.url}
             alt="Error!! Imagen no cargada"
           />
           </Carousel.Item>          
       ))}        
       </Carousel>
      )
+    }else if(this.state.result[0]===0){
+      return(
+        <Carousel className="gridList">        
+          <Carousel.Item>
+            <div className="LoaderGalery">
+            <div className="ui active centered big loader"></div>
+            </div>
+            </Carousel.Item>                 
+        </Carousel>
+        )
+    }
   }
 }
 

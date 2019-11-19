@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './LogoBlanco.png';
 import './App.css';
+import './semantic/semantic.min.css'
 import { Button, Menu, Icon} from 'semantic-ui-react';
 class App extends Component {
   constructor(props) {
@@ -12,11 +13,12 @@ class App extends Component {
         },
       },
       hasError: false,
+      idUser:'0',
       activeItem: 'home',
       Validate:{
         content: ''
       },
-      Screen:'NoAutenticado'
+      Screen:'NoAutenticado',
     }
   }
   _fetchMovie(User){
@@ -31,39 +33,44 @@ class App extends Component {
     .then(res => res.json())
     .then((jsonData) => {
       this.setState({Validate : jsonData});
-    })     
+    })    
     }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
   componentDidMount(){
     try {
       let url = window.location.href;
       let urlSplit= url.split("?")
-      const id =urlSplit[1].split("=")[1];
-      console.log(id)
-      if(urlSplit.length===3){
+      let id =urlSplit[1].split("=")[1];
+      if(urlSplit.length>2){
         const User =urlSplit[2].split("=")[1];
+        this.setState({idUser: User})
         this._fetchValidate(User);
-        if(this.state.Validate.content==="user is authenticate!!!"){
-          this.setState({ Screen: 'Autenticado' });
-          this._fetchMovie(User);
-        }else{
-          this.setState({ Screen: 'NoAutenticado' });
-        }
-      }else{
-        this.setState({ Screen: 'NoAutenticado' });
+        this._fetchMovie(User)
       }
     } catch(e) {
       this.setState({ hasError: true });
     }
   }
+  HandleLogOut(User){
+    var request ={
+      method: 'POST'
+    }
+    fetch('http://181.50.100.167:4000/logout?id='+User,request)
+    .then(res => res.json())
+    .then(response => {
+      if (response.response ==2){
+        console.log("funciiono")
+        window.location.replace("http://159.65.58.193:3000/login")
+      }
+    })    
+  } 
   render(){
   const { activeItem } = this.state
-  console.log(this.state.Validate.content)
   if (this.state.hasError) {
       return <div className="Error-Page"><img src={logo} className="Error-Logo" alt=" Error!Imagen no cargada!"/></div>;
     }else{
-  if (this.state.Screen==="Autenticado"){
-
+  if (this.state.Validate.content==="user is authenticate!!!"){
+    console.log(this.state.Validate.content)
   return (
     <div>
       <header className="App-header">
@@ -88,15 +95,14 @@ class App extends Component {
           </Menu>
         <br/>
         </div>
-        <div className="UserInformation">
-          Bienvenido, 
+        <div className="UserInformation"> 
           {" "+this.state.result.content.name}
+          <div className="LogOut" onClick={()=>this.HandleLogOut(this.state.idUser)}><Icon size={15} name='sign-out inverted'/></div>
         </div>
-        <div className="LogOut"><Button  secondary icon href="http://159.65.58.193:3000/login/" target='_self' ><Icon name='sign-out alternate' size='small'/></Button></div>
       </header>
       <div className="decorBar"></div>
     </div> 
-    )}else{
+    )}else if(this.state.Validate.content==="user is not authenticated!!!" || this.state.idUser==='0'){
       return(
         <div>
         <header className="App-header">
@@ -125,6 +131,16 @@ class App extends Component {
         <div className="decorBar"></div>
       </div>
       )
+    }else{
+      return(
+          <div>
+            <div className="App-header">
+              <br/>
+              <div className="ui active centered inline big loader"></div>
+              </div>
+            <div className="decorBar"></div>
+          </div>
+      );   
     }
     
     ;}

@@ -8,9 +8,9 @@ class CommentGrid extends Component{
     this.state = {
       result: [],
       rating: 0,
-      Text: "SinComentario",
-      idRes: '',
-      UserId: '',
+      Text: "",
+      idRes: null,
+      UserId: null,
     }
   }
   _fetchMovie(id){
@@ -46,20 +46,24 @@ class CommentGrid extends Component{
   _PutComment = (e)=>{
     let url = window.location.href;
     let urlSplit= url.split("?")
+    var User = null
+    console.log(urlSplit)
     if(urlSplit.length > 2){
-      const User = urlSplit[2].split("=")[1];
-      this.setState({ UserId : User})
-    }else{
-      this.setState({UserId : null})
+      var User = urlSplit[2].split("=")[1];
     }
-    var Autor = this.state.UserId
+    var Autor = User
+    var Restaurant = this.state.idRes
+    var valueStar = this.state.rating
+    var Comentario = this.state.Text
+    if(Comentario===""){
+      var Comentario = "No hay comentario"
+    }
     var params ={
-      restaurant_id : this.state.idRes,
+      restaurant_id : Restaurant,
       autor_id : Autor,
-      puntuation : this.state.rating,
-      comment : this.state.Text
+      puntuation : valueStar,
+      comment : Comentario
     }
-    console.log(params)
     var request = {
         method: 'POST',
         headers:{
@@ -67,15 +71,18 @@ class CommentGrid extends Component{
         },
       body : JSON.stringify(params)
     }
-    fetch('http://181.50.100.167:5000/postReview',request)
-      .then(response =>  {
-          console.log(response.status)
-          if (response.status == "200") {
-              console.log("se escribió con exito")
-              window.location.reload();
-          };
-      })
-      .catch(err => console.log("Se presentó un error"));
+    console.log(params)
+    if(Restaurant && Autor && (valueStar||Comentario)){
+      fetch('http://181.50.100.167:5000/postReview',request)
+        .then(response =>  {
+            console.log(response)
+            if (response.status === 200) {
+                console.log("se escribió con exito")
+                //window.location.reload();
+            };
+        })
+        .catch(err => console.log("Se presentó un error"));
+    }
   }
   render(){
     if(this.state.result.length !==0){
@@ -84,7 +91,7 @@ class CommentGrid extends Component{
         <Header as='h3' dividing className="Header-Comments">
           Commentarios
         </Header>
-        <div className="Comments-Grid" style={{overflow: 'auto', maxHeight: 700 }}>
+        <div className="Comments-Grid" style={{overflow: 'auto'}}>
         {this.state.result.map((data, i) => (
           <Comment  key={i}>
           <Comment.Avatar src={Avatar}/>

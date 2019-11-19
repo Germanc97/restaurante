@@ -5,9 +5,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+#html{
+  overflow-x: auto !important;
+}
 #body{
   height: 100%;
   margin-bottom: 0%;
+  overflow-x: auto !important;
 }
 #root{
   height: 100%;
