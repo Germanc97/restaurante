@@ -19,14 +19,8 @@ export default class MenuRes extends Component {
         this.setState({idRes : id})
         if(urlSplit.length===3){
           const User =urlSplit[2].split("=")[1];
+          this.setState({idUser:User})
           this._fetchValidate(User);
-          if(this.state.Validate.content==="user is authenticate!!!"){
-            this.setState({ Screen: 'Autenticado' });
-          }else{
-            this.setState({ Screen: 'NoAutenticado' });
-          }
-        }else{
-          this.setState({ Screen: 'NoAutenticado' });
         }
       } catch(e) {
         console.log("Error");
@@ -37,19 +31,19 @@ export default class MenuRes extends Component {
   
     render() {
       const { activeItem } = this.state
-      if (this.state.Screen==="Autenticado"){
+      if (this.state.Validate.content==="user is authenticate!!!"){
       return (
         <div>
           <Menu vertical inverted pointing secondary>
-          <Menu.Item header style={{fontSize: '15px', padding:'0.2em 0px 0.2em 1em'}}>Menú</Menu.Item>
-            <Menu.Item href={'http://181.50.100.167:8000/api/createReservationByRestaurantIdAndUserId/'+this.state.idRes+'/'+this.state.idUser} target='_self'
-              style={{fontSize: '15px' , padding:'2px 0px 0.5em 1em'}}
+          <Menu.Item header style={{fontSize: '16.5px', padding:'0.2em 0px 0.2em 1em'}}>Menú</Menu.Item>
+            <Menu.Item href={'http://159.65.58.193:8000/api/createReservationByRestaurantIdAndUserId/'+this.state.idRes+'/'+this.state.idUser} target='_self'
+              style={{fontSize: '16.5px' , padding:'2px 0px 0.5em 1em'}}
               name='Reserva aqui!'
               active={activeItem === 'Reserva aqui!'}
               onClick={this.handleItemClick}
             />
             <Menu.Item href={'http://181.50.100.167:7001/home/'+this.state.idRes+'-'+this.state.idUser} target='_self'
-             style={{fontSize: '15px' , padding:'2px 0px 0.5em 1em'}}
+             style={{fontSize: '16.5px' , padding:'2px 0px 0.5em 1em'}}
               name='Ver Menú'
               active={activeItem === 'Ver Menú'}
               onClick={this.handleItemClick}
