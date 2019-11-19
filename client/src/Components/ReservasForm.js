@@ -9,7 +9,7 @@ import ResList from './ResList.js'
         result:[1]
     }
     _fetchMovie(id){
-        fetch('http://181.50.100.167:8000/api/getActiveReservationsByRestaurantId/'+id)
+        fetch('http://159.65.58.193:8000/api/getActiveReservationsByRestaurantId/'+id)
         .then(res => res.json())
         .then(result => {
           const {Content=[]}=result
@@ -22,11 +22,9 @@ import ResList from './ResList.js'
       let url = window.location.href;
       let urlSplit = url.split("?")
       const id = urlSplit[1].split("=")[1];
-      console.log(id)
       this._fetchMovie(id)
     }
    render(){
-    
      return(
       <Card.Group itemsPerRow={4}>
         <ResList  Content={this.state.result}></ResList>

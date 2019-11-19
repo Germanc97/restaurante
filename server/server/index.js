@@ -48,25 +48,6 @@ app.get('/getCities',function(req,res){
         });
     }
 });
-app.get('/getper',function(req,res){
-    try{
-        request.get('http://181.50.100.167:4000/getNameUser?id=2',function(err,response,body){
-            if (err) throw err;
-            if(JSON.parse(body).response===2){
-                console.log(JSON.parse(body).content.name);
-            }
-            res.status(200).json({
-                "Response":2
-            });
-        })
-        
-    }catch(err){
-        console.log(err);
-        res.json({
-            "response":1
-        });
-    }
-});
 app.get('/getRestaurant/:idRestaurant',function(req,res){
     var idn=req.params.idRestaurant;
     try{
@@ -125,21 +106,28 @@ app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
             Query2 = {projection: {name:1}};
             dbo.collection("Restaurant").find(Query,Query2).toArray(function(err, result) {
                 if (err) throw err;
-                var restaurantName=result[0].name
-                var entries = [{$match: { "restaurant_id": { $eq:parseInt(idn,10)}}},{$group: {_id:null, AvgPuntuation: {$avg:"$puntuation"}}},{ $project : { _id:0}}];
-                dbo.collection("Comments").aggregate(entries).toArray(function(err, result) {
-                    if (err) throw err;
-                    var value=0;
-                    if (!(result.length===0)){
-                        value=Math.floor(result[0].AvgPuntuation);
-                    }
-                    outValue=[{name:restaurantName,puntuation:value}];
-                    res.status(200).json({
-                        "Response":2,
-                        "Content":outValue
+                if (result.length===0){
+                    res.status(404).json({
+                        "Response":1
                     });
                     db.close();
-                });
+                }else{
+                    var restaurantName=result[0].name
+                    var entries = [{$match: { "restaurant_id": { $eq:parseInt(idn,10)}}},{$group: {_id:null, AvgPuntuation: {$avg:"$puntuation"}}},{ $project : { _id:0}}];
+                    dbo.collection("Comments").aggregate(entries).toArray(function(err, result) {
+                        if (err) throw err;
+                        var value=0;
+                        if (!(result.length===0)){
+                            value=Math.floor(result[0].AvgPuntuation);
+                        }
+                        outValue=[{name:restaurantName,puntuation:value}];
+                        res.status(200).json({
+                            "Response":2,
+                            "Content":outValue
+                        });
+                        db.close();
+                    });
+                }
             });
         });
     }catch(err){
@@ -270,6 +258,11 @@ app.get('/getReviewsxRestaurant/:idRestaurant',function(req,res){
               }];
             dbo.collection("Comments").aggregate(entries).sort(mySort).toArray(function(err, result) {
                 if (err) throw err;
+                for (var i = 0; i < result.length; i++) {
+                    if(result[i].autor.length===0){
+                        result[i].autor.push({userName: "Anonimo"});
+                    }
+                };
                 res.status(200).json({
                     "Response":2,
                     "Content":result
@@ -420,17 +413,16 @@ app.put('/putUpdateRestaurant',function(req,res){
         res.end(JSON.stringify({Response:1}));
     }
 });
-//post methods
-app.post('/postImage',function(req,res){
-    var newImageData=req.body;
-    var entries = {restaurant_id:parseInt(newImageData.restaurant_id,10),name:newImageData.name,url:newImageData.url};
+app.put('/putUpdateImage/:idImage',function(req,res){
+    var idn=req.params.idImage;
     try{
-        var MongoClient = require('mongodb');
+        var MongoClient = require('mongodb').MongoClient;
         var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
         MongoClient.connect(url,{ useUnifiedTopology: true }, function(err, db) {
             if (err) throw err;
             var dbo = db.db("Restaurants");
-            dbo.collection("Images").insertOne(entries,function(err,res){
+            var myquery = { _id: parseInt(idn,10)};
+            dbo.collection("Images").deleteOne(myquery, function(err, obj) {
                 if (err) throw err;
                 db.close();
             });
@@ -440,6 +432,7 @@ app.post('/postImage',function(req,res){
         res.end(JSON.stringify({Response:1}));
     }
 });
+//post methods
 app.post('/postRestaurant',function(req,res){
     var newRestaurantData=req.body;
     try{
@@ -467,7 +460,7 @@ app.post('/postRestaurant',function(req,res){
         res.end(JSON.stringify({Response:0}));
     }
 });
-app.post('/postPrueba',function(req,res){
+app.post('/postImage',function(req,res){
     var route='server/files/';
     let file = req.files.archivo;
     let fileName = file.name.split('.')[0];
@@ -484,7 +477,11 @@ app.post('/postPrueba',function(req,res){
             var mySort =  { _id:-1 };
             dbo.collection("Images").find({},{projection: {_id:1}}).sort(mySort).toArray(function(err,result){
                 if (err) throw err;
-                idn=result.length+1;
+                if (result.length===0){
+                    idn=1;
+                }else{
+                    idn=result[0]._id+1;
+                }
                 idRestaurant=parseInt(req.body.restaurant_id,10);
                 route=route.concat(idn.toString(),'.jpeg');
                 var route1='http://181.50.100.167:5000/static/'

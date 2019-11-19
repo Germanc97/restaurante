@@ -27,11 +27,11 @@ componentDidMount(){
     render() {
     return(
       <div>
-      <div className="ui botton attached button"><Title>Comentarios</Title></div> 
-      <div className="Salto"/>
-      <ComentariosForm  Content={this.state.result}></ComentariosForm>
+        <div className="ui botton attached button"><Title>Comentarios</Title></div> 
+        <br></br>
+        <ComentariosForm  Content={this.state.result}></ComentariosForm>
       </div>
     );
     }
   }
-  export default PageInf;
+  export default PageInf;    

@@ -48,25 +48,6 @@ app.get('/getCities',function(req,res){
         });
     }
 });
-app.get('/getper',function(req,res){
-    try{
-        request.get('http://181.50.100.167:4000/getNameUser?id=2',function(err,response,body){
-            if (err) throw err;
-            if(JSON.parse(body).response===2){
-                console.log(JSON.parse(body).content.name);
-            }
-            res.status(200).json({
-                "Response":2
-            });
-        })
-        
-    }catch(err){
-        console.log(err);
-        res.json({
-            "response":1
-        });
-    }
-});
 app.get('/getRestaurant/:idRestaurant',function(req,res){
     var idn=req.params.idRestaurant;
     try{
@@ -270,6 +251,11 @@ app.get('/getReviewsxRestaurant/:idRestaurant',function(req,res){
               }];
             dbo.collection("Comments").aggregate(entries).sort(mySort).toArray(function(err, result) {
                 if (err) throw err;
+                for (var i = 0; i < result.length; i++) {
+                    if(result[i].autor.length===0){
+                        result[i].autor.push({userName: "Anonimo"});
+                    }
+                };
                 res.status(200).json({
                     "Response":2,
                     "Content":result

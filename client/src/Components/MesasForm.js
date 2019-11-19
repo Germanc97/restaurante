@@ -9,7 +9,7 @@ class ListTable extends Component {
   }
 
     _fetchMovie(id){
-    fetch('http://181.50.100.167:8000/api/getTablesByRestaurantId/'+id)
+    fetch('http://159.65.58.193:8000/api/getTablesByRestaurantId/'+id)
     .then(res => res.json())
     .then(result => {
       const {Content=[]}=result
@@ -22,7 +22,6 @@ class ListTable extends Component {
       let url = window.location.href;
       let urlSplit = url.split("?")
       const id = urlSplit[1].split("=")[1];
-      console.log(id)
       this._fetchMovie(id)
     }
 

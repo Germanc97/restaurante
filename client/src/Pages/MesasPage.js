@@ -5,6 +5,7 @@ import {Title} from '../Components/Title.js';
 import { Segment, Form, Checkbox } from 'semantic-ui-react';
 import { Button, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import '../semantic/semantic.min.css'
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 class Mesas extends Component {
   state = {
@@ -39,23 +40,16 @@ class Mesas extends Component {
     });
   }
   _handleSubmit=(e)=>{
+      var FK_idRestaurant1 = parseInt(this.state.id)
       var idTableRest1 = parseInt(this.state.idTableRest)
-      var numberChairs1 = parseInt(this.state.idTableRest)
-      var params = {
-        FK_idRestaurant: parseInt(this.state.id),
-        idTableRest: idTableRest1,
-        numberChairs: numberChairs1
-      }
-      console.log(JSON.stringify(params))
-      var request = {
-        method: 'POST',
-        body : JSON.stringify(params)
-    } 
-      fetch('http://181.50.100.167:8000/api/addTable',request)
+      var numberChairs1 = parseInt(this.state.numberChairs)
+      fetch('http://159.65.58.193:8000/api/addTable/' + FK_idRestaurant1 +'/'+idTableRest1+'/'+numberChairs1)
       .then(response =>  {
           console.log(response.status)
           if (response.status == "200") {
               console.log("se escribió con exito")
+              this.handleClose()
+              this.handleOpenToast()
           };
       })
       .catch(err => console.log("Se presentó un error"));
@@ -66,7 +60,19 @@ class Mesas extends Component {
     open = () => this.setState({AddTable: true})
 
     close = () => this.setState({AddTable: false})
-
+    
+    handleOpenToast=()=>{
+      ToastsStore.success("Creada correctamente")
+    }
+    //handleOpenToastError=()=>{
+    //  ToastsStore.error("Error")
+    //}  
+  
+    handleClose=()=>{
+      window.setTimeout(function(){
+        window.location.reload();  
+      }, 1000);
+    }
   render(){ 
     return (
     <div >
@@ -91,7 +97,7 @@ class Mesas extends Component {
               Número de sillas:
               </label>
               <div className="ui input">
-                <input type="text"  onChange={this.handleChandleChangeChairsangeIdTable}></input>
+                <input type="text"  onChange={this.handleChangeChairs}></input>
               </div>             
               </Modal.Content>
             <Modal.Actions>
@@ -102,6 +108,12 @@ class Mesas extends Component {
                   labelPosition='right'
                   content='Crear'
                   onClick={this._handleSubmit}
+                />
+                <ToastsContainer
+                  style='toast'
+                  store={ToastsStore} 
+                  position={ToastsContainerPosition.TOP_RIGHT}
+                  preventDuplicates={true}                           
                 />
               </Modal.Actions>
             </Modal>                        

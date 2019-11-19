@@ -38,8 +38,7 @@ class ResList extends Component {
         return <div className="waiting"> 
                 <div className="ui active centered inline loader loader "></div>
                </div>
-      }
-        else{ 
+      }else{ 
             console.log('3')
             return(
         Content.map(file =>{
