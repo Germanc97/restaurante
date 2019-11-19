@@ -413,17 +413,16 @@ app.put('/putUpdateRestaurant',function(req,res){
         res.end(JSON.stringify({Response:1}));
     }
 });
-//post methods
-app.post('/postImage',function(req,res){
-    var newImageData=req.body;
-    var entries = {restaurant_id:parseInt(newImageData.restaurant_id,10),name:newImageData.name,url:newImageData.url};
+app.put('/putUpdateImage/:idImage',function(req,res){
+    var idn=req.params.idImage;
     try{
-        var MongoClient = require('mongodb');
+        var MongoClient = require('mongodb').MongoClient;
         var url = "mongodb://dba:dba2019@181.50.100.167:27018/Restaurants";
         MongoClient.connect(url,{ useUnifiedTopology: true }, function(err, db) {
             if (err) throw err;
             var dbo = db.db("Restaurants");
-            dbo.collection("Images").insertOne(entries,function(err,res){
+            var myquery = { _id: parseInt(idn,10)};
+            dbo.collection("Images").deleteOne(myquery, function(err, obj) {
                 if (err) throw err;
                 db.close();
             });
@@ -433,6 +432,7 @@ app.post('/postImage',function(req,res){
         res.end(JSON.stringify({Response:1}));
     }
 });
+//post methods
 app.post('/postRestaurant',function(req,res){
     var newRestaurantData=req.body;
     try{
@@ -460,7 +460,7 @@ app.post('/postRestaurant',function(req,res){
         res.end(JSON.stringify({Response:0}));
     }
 });
-app.post('/postPrueba',function(req,res){
+app.post('/postImage',function(req,res){
     var route='server/files/';
     let file = req.files.archivo;
     let fileName = file.name.split('.')[0];
@@ -477,7 +477,11 @@ app.post('/postPrueba',function(req,res){
             var mySort =  { _id:-1 };
             dbo.collection("Images").find({},{projection: {_id:1}}).sort(mySort).toArray(function(err,result){
                 if (err) throw err;
-                idn=result.length+1;
+                if (result.length===0){
+                    idn=1;
+                }else{
+                    idn=result[0]._id+1;
+                }
                 idRestaurant=parseInt(req.body.restaurant_id,10);
                 route=route.concat(idn.toString(),'.jpeg');
                 var route1='http://181.50.100.167:5000/static/'
