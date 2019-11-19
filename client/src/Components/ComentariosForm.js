@@ -22,7 +22,6 @@ class ComentariosForm extends React.Component {
     return(
         <Card.Group centered className="center"  itemsPerRow={1}>
             {Content.map((data, i) => (
-            //<Container className="width">
                 <Card  color='yellow'>
                         <Card.Content className="bold" >Puntuación  <Rating icon='star' defaultRating={data.puntuation} maxRating={data.puntuation} disabled icon='star' size='huge'/></Card.Content>
                         <Card.Content description={data.comment} />
@@ -30,7 +29,6 @@ class ComentariosForm extends React.Component {
                             <Icon name='user' />{data._id}
                         </Card.Content>
                 </Card>
-            //</Container>
             ))}
         </Card.Group>       
      )

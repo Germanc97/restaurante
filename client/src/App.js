@@ -10,6 +10,7 @@ class App extends Component {
     super(props)
     this.state = {
       id:"",
+      idUser:"",
       result: [],
       activeItem: ''
     }
@@ -33,8 +34,9 @@ class App extends Component {
     let url = window.location.href;
     let urlSplit = url.split("?")
     const id = urlSplit[1].split("=")[1];
+    const idUser = urlSplit[2].split("=")[1];
     console.log(id)
-    this.setState({id : id})
+    this.setState({id : id,idUser:idUser})
     this._fetchMovie(id)
   }
   render(){
@@ -45,11 +47,11 @@ class App extends Component {
         <div className="Menu">
         <img src={logo} className="App-logo" alt="logo"/>
         <Menu inverted pointing secondary>
-          <Menu.Item as={ Link } name='Información' to ={"/?id="+this.state.id}
+          <Menu.Item as={ Link } name='Información' to ={"/?id="+this.state.id+"?id="+this.state.idUser}
             active={activeItem === 'Información'}
             onClick={this.handleItemClick}>
           </Menu.Item>
-          <Menu.Item as={ Link } name='Reservas' to ={'/Reservas/?id='+this.state.id}
+          <Menu.Item as={ Link } name='Reservas' to ={'/Reservas/?id='+this.state.id+"?id="+this.state.idUser}
             active={activeItem === 'Reservas'}
             onClick={this.handleItemClick}
           />
@@ -58,7 +60,7 @@ class App extends Component {
             active={activeItem === 'Buzón'}
             onClick={this.handleItemClick}
           />
-          <Menu.Item as={ Link }  name='Galería' to ={'/Galeria/?id='+this.state.id}        
+          <Menu.Item as={ Link }  name='Galería' to ={'/Galeria/?id='+this.state.id+"?id="+this.state.idUser}        
             active={activeItem === 'Galería'}
             onClick={this.handleItemClick}/>
            <Menu.Item  href='http://181.50.100.167:4001/Events' target='_self'
@@ -71,11 +73,11 @@ class App extends Component {
             active={activeItem === 'Decoración'}
             onClick={this.handleItemClick}
           />
-           <Menu.Item as={ Link } name='Comentarios' to ={'/Comentarios/?id='+this.state.id}            
+           <Menu.Item as={ Link } name='Comentarios' to ={'/Comentarios/?id='+this.state.id+"?id="+this.state.idUser}            
             active={activeItem === 'Comentarios'}
             onClick={this.handleItemClick}
           />
-          <Menu.Item as={ Link } name='Mesas' to ={'/Mesas/?id='+this.state.id}  
+          <Menu.Item as={ Link } name='Mesas' to ={'/Mesas/?id='+this.state.id+"?id="+this.state.idUser}  
             active={activeItem === 'Mesas'}
             onClick={this.handleItemClick}
           />
@@ -84,7 +86,6 @@ class App extends Component {
         </div>
         {this.state.result.map((data, i) => (
         <div className="UserInformation" key={i}>
-          Bienvenido, 
           {" "+data.name||"Nombre restaurante"}
           <div><Rating icon='star' defaultRating={data.puntuation} maxRating={data.puntuation} disabled icon='star' size='huge'/></div>
         </div>

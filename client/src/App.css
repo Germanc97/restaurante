@@ -1,6 +1,7 @@
 
 .App-logo {
   height: 90px;
+  width: 80px;
   margin-right: 10px;
   margin-left: 20px;
   padding-bottom: 15px;
@@ -112,6 +113,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
   height: 200px;
+}
+.confirm2{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 250px;
 }
 .waiting{
   height: calc(100vh - 236px);

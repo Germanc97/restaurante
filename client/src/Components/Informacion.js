@@ -204,7 +204,6 @@ render(){
                     </div>                  
                     </Form>
                     </Segment>                                                     
-                      <form action={'http://181.50.100.167:3000/?id=' + this.props.Content[0]._id}>
                         <Modal className="confirm" open={this.state.open} onClose={this.close} >
                           <Modal.Header>Modificar información Restaurante</Modal.Header>
                           <Modal.Content>
@@ -227,7 +226,6 @@ render(){
                             />
                           </Modal.Actions>
                         </Modal>
-                      </form>
                     </div>
             )
          })          

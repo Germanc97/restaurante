@@ -9,13 +9,14 @@ class List extends Component {
     }
    render(){
     const {Content} = this.props
+    console.log(this.props)
     return(
         Content.map(file =>{
-      return(        
+      return(       
             <div className="ui card" key={file._id}>
-            <img src={file.img} className="cardimg" alt="ERROR! imagen no cargada!"/>
+            <img src={file.url} className="cardimg" alt="ERROR! imagen no cargada!"/>
             <div className="Barra">
-                    <div className="titulo d-flex align-items-center justify-content-start">{file.title}</div>
+                    <div className="titulo d-flex align-items-center justify-content-start">{file.name}</div>
                     <div className="icono d-flex justify-content-end"><Button circular icon='delete' /></div>
             </div>
             </div>       
