@@ -111,22 +111,23 @@ app.get('/getRestaurantPuntuation/:idRestaurant',function(req,res){
                         "Response":1
                     });
                     db.close();
-                };
-                var restaurantName=result[0].name
-                var entries = [{$match: { "restaurant_id": { $eq:parseInt(idn,10)}}},{$group: {_id:null, AvgPuntuation: {$avg:"$puntuation"}}},{ $project : { _id:0}}];
-                dbo.collection("Comments").aggregate(entries).toArray(function(err, result) {
-                    if (err) throw err;
-                    var value=0;
-                    if (!(result.length===0)){
-                        value=Math.floor(result[0].AvgPuntuation);
-                    }
-                    outValue=[{name:restaurantName,puntuation:value}];
-                    res.status(200).json({
-                        "Response":2,
-                        "Content":outValue
+                }else{
+                    var restaurantName=result[0].name
+                    var entries = [{$match: { "restaurant_id": { $eq:parseInt(idn,10)}}},{$group: {_id:null, AvgPuntuation: {$avg:"$puntuation"}}},{ $project : { _id:0}}];
+                    dbo.collection("Comments").aggregate(entries).toArray(function(err, result) {
+                        if (err) throw err;
+                        var value=0;
+                        if (!(result.length===0)){
+                            value=Math.floor(result[0].AvgPuntuation);
+                        }
+                        outValue=[{name:restaurantName,puntuation:value}];
+                        res.status(200).json({
+                            "Response":2,
+                            "Content":outValue
+                        });
+                        db.close();
                     });
-                    db.close();
-                });
+                }
             });
         });
     }catch(err){
