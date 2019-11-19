@@ -40,7 +40,8 @@ class App extends Component {
     try {
       let url = window.location.href;
       let urlSplit= url.split("?")
-      if(urlSplit.length===3){
+      let id =urlSplit[1].split("=")[1];
+      if(urlSplit.length>2){
         const User =urlSplit[2].split("=")[1];
         this.setState({idUser: User})
         this._fetchValidate(User);
@@ -101,7 +102,7 @@ class App extends Component {
       </header>
       <div className="decorBar"></div>
     </div> 
-    )}else if(this.state.Validate.content==="user is not authenticated!!!"){
+    )}else if(this.state.Validate.content==="user is not authenticated!!!" || this.state.idUser==='0'){
       return(
         <div>
         <header className="App-header">
