@@ -42,7 +42,7 @@ export default class MenuRes extends Component {
               active={activeItem === 'Reserva aqui!'}
               onClick={this.handleItemClick}
             />
-            <Menu.Item href={'http://181.50.100.167:7001/home/'+this.state.idRes+'-'+this.state.idUser} target='_self'
+            <Menu.Item href={'http://181.50.100.167:7001/home/'+this.state.idRes+'-'+"0"} target='_self'
              style={{fontSize: '16.5px' , padding:'2px 0px 0.5em 1em'}}
               name='Ver Menú'
               active={activeItem === 'Ver Menú'}
