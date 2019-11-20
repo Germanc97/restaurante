@@ -222,7 +222,8 @@ render(){
                             style='toast'
                             store={ToastsStore} 
                             position={ToastsContainerPosition.TOP_RIGHT}
-                            preventDuplicates={true}                           
+                            preventDuplicates={true}  
+                            iconClassNames={"toast-success"}                         
                             />
                           </Modal.Actions>
                         </Modal>
