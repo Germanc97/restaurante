@@ -77,7 +77,7 @@ class App extends Component {
         <div className="Menu">
         <img src={logo} className="App-logo" alt="logo"/>
         <Menu inverted pointing secondary>
-            <Menu.Item href={'http://159.65.58.193:3000/profile'} target='_self'
+            <Menu.Item href={'http://159.65.58.193:3000/profile/'} target='_self'
               name='Mi perfil'
               active={activeItem === 'Mi perfil'}
               onClick={this.handleItemClick}
@@ -87,7 +87,7 @@ class App extends Component {
               active={activeItem === 'Reservas Públicas'}
               onClick={this.handleItemClick}
             />
-            <Menu.Item href={'http://181.50.100.167:4001/Principal/'} target='_self'
+            <Menu.Item href={'http://181.50.100.167:4001/Principal/?id='+this.state.idUser+"?pass=1?ciudad=1"} target='_self'
               name='Buscar Restaurantes'
               active={activeItem === 'Buscar Restaurantes'}
               onClick={this.handleItemClick}

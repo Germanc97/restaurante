@@ -99,7 +99,7 @@ class CommentGrid extends Component{
             console.log(response)
             if (response.status === 200) {
                 console.log("se escribió con exito")
-                //window.location.reload();
+                window.location.reload();
             };
         })
         .catch(err => console.log("Se presentó un error"));
