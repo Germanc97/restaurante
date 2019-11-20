@@ -45,7 +45,7 @@ class galeria extends Component{
       body : data
     }
     
-    fetch('http://181.50.100.167:5000/postPrueba',request)
+    fetch('http://181.50.100.167:5000/postImage',request)
     .then(response => {console.log(response)
         if (response.status == "200") {
             console.log("se escribió con exito")
