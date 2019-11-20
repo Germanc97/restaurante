@@ -12,6 +12,7 @@ class CommentGrid extends Component{
       idRes: null,
       UserId: null,
       Validate:{
+        response: null,
         content: ''
       }
     }
@@ -40,6 +41,11 @@ class CommentGrid extends Component{
       let url = window.location.href;
       let urlSplit= url.split("?")
       const id = urlSplit[1].split("=")[1];
+      if(urlSplit.length > 2){
+        var User = urlSplit[2].split("=")[1];
+        this.setState({UserId : User})
+        this._fetchValidate(User)
+      }
       this.setState({ idRes : id})
       this._fetchMovie(id);
     } catch(e) {
@@ -56,27 +62,28 @@ class CommentGrid extends Component{
   _PutComment = (e)=>{
     let url = window.location.href;
     let urlSplit= url.split("?")
-    var User = null
     console.log(urlSplit)
-    if(urlSplit.length > 2){
-      var User = urlSplit[2].split("=")[1];
-      this._fetchValidate(User)
-      if(this.state.Validate.content!=="user is authenticate!!!"){
-        var User=null
-      }
-    }
-    var Autor = User
+    var Autor = this.state.UserId
     var Restaurant = this.state.idRes
     var valueStar = this.state.rating
     var Comentario = this.state.Text
     if(Comentario===""){
       var Comentario = "No hay comentario"
     }
-    var params ={
-      restaurant_id : Restaurant,
-      autor_id : Autor,
-      puntuation : valueStar,
-      comment : Comentario
+    if(this.state.Validate.response === 2){
+      var params ={
+        restaurant_id : Restaurant,
+        autor_id : Autor,
+        puntuation : valueStar,
+        comment : Comentario
+      }
+    }else if (this.state.Validate.response === 1){
+      var params ={
+        restaurant_id : Restaurant,
+        autor_id : null,
+        puntuation : valueStar,
+        comment : Comentario
+      }
     }
     var request = {
         method: 'POST',
@@ -86,13 +93,13 @@ class CommentGrid extends Component{
       body : JSON.stringify(params)
     }
     console.log(params)
-    if(Restaurant && (valueStar||Comentario)){
+    if(Restaurant && this.state.Validate.response && (valueStar||Comentario)){
       fetch('http://181.50.100.167:5000/postReview',request)
         .then(response =>  {
             console.log(response)
             if (response.status === 200) {
                 console.log("se escribió con exito")
-                window.location.reload();
+                //window.location.reload();
             };
         })
         .catch(err => console.log("Se presentó un error"));
