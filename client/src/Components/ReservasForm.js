@@ -23,8 +23,11 @@ import ResList from './ResList.js'
       let urlSplit = url.split("?")
       const id = urlSplit[1].split("=")[1];
       this._fetchMovie(id)
+      console.log(id)
     }
+
    render(){
+     console.log(this.state.result)
      return(
       <Card.Group itemsPerRow={4}>
         <ResList  Content={this.state.result}></ResList>

@@ -14,7 +14,7 @@ class App extends Component {
       result: [],
       activeItem: '',
       Validate:{
-        content:''
+        response:''
       }
   }
 }
@@ -69,7 +69,7 @@ class App extends Component {
 
   render(){
   const { activeItem } = this.state
-  if (this.state.Validate.content==="user is authenticate!!!"){
+  if (this.state.Validate.response===2){
     return (
       <div>
         <header className="App-header">
@@ -124,13 +124,19 @@ class App extends Component {
         <div className="decorBar"></div>      
       </div> 
       );
-    }else{
+    }else if(this.state.Validate.response===1) {
       window.location.href = "http://159.65.58.193:3000/login"
       return( 
       <div className="loaderhref">
         <div class="ui active loader"></div> 
       </div>      
       )
+    }else{
+      return( 
+        <div className="loaderhref">
+          <div class="ui active loader"></div> 
+        </div>      
+        )
     }
   }
 }

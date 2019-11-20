@@ -19,6 +19,7 @@ class Reservas extends Component {
     const id = urlSplit[1].split("=")[1];
     const idUser = urlSplit[2].split("=")[1];
     this.setState({id:id,idUser:idUser})
+    console.log(urlSplit)
   }
   render(){ 
     return (
@@ -29,8 +30,9 @@ class Reservas extends Component {
                   className='ui inverted secondary button'>
                   <i className="add icon"></i>
                   Añadir Reserva          
-            </Button>
-        </div>                     
+            </Button>           
+        </div>       
+        <Segment><CardsRes></CardsRes></Segment>          
     </div> 
   );
 }

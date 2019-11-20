@@ -124,6 +124,10 @@ class InformacionForm extends Component {
           window.location.reload();  
       }, 1000);
   }
+  
+  handleMenu=()=>{
+    window.location.href='http://181.50.100.167:7001/admin/'+this.state.id+'-'+this.state.idUser
+  }
   componentDidMount(){
     let url = window.location.href;
     let urlSplit = url.split("?")
@@ -208,7 +212,7 @@ render(){
                         </div>
                     </div>
                     <div className="form-row justify-content-end align-items-end">                              
-                    <button className="ui inverted secondary button" href={'http://181.50.100.167:7001/admin/'+this.state.id+'-'+this.state.idUser}>Modificar Menú</button> 
+                    <button className="ui inverted secondary button" onClick={this.handleMenu}>Modificar Menú</button> 
                     <button className="ui inverted secondary button" onClick={this.handleClose}>Cancelar</button> 
                     <button className="ui inverted secondary button" onClick={this.open}>Aceptar</button>                  
                     </div>                  

@@ -4,46 +4,50 @@ import '../semantic/semantic.min.css'
 import PropTypes from 'prop-types'
 import Error from '../ImgSrc/ErrorServer.png'
 import '../App.css';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+
 class ResList extends Component {
       PropTypes ={
         Content : PropTypes.array,
       }
       state = {
+        idRes:"",
         open: false
       }
 
-      open = () => this.setState({open: true})
+      open = (id) => this.setState({idRes:id,open: true})
 
       close = () => this.setState({open: false})
 
-      handleDeleteReservation=(id)=>{
-        fetch("http://181.50.100.167:8000/api/deleteReservationByReservationId/" + id, {
-            method: 'POST'
-          }).then(() => {
+      handleDeleteReservation=()=>{
+        fetch("http://159.65.58.193:8000/api/deleteReservationByReservationId/" +this.state.idRes)
+        .then(() => {
+            this.handleOpenToast()
+            this.handleClose()
              console.log('removed');
-             window.location.reload();
           }).catch(err => {
             console.error(err);
           });    
       }
 
+      handleOpenToast=()=>{
+        ToastsStore.success("Eliminada correctamente")
+      }
+    
+      handleClose=()=>{
+            window.setTimeout(function(){
+              window.location.reload();  
+          }, 1000);
+      }
+
       render(){
       const {Content} = this.props
-      console.log(Content)
-      if (Content.length === 0){
-          console.log('1')
-        return <img src={Error} className="ImgErrorButton" alt='Vale shit'/>;
-      }else if (Content[0]=== 1){
-        console.log('2')       
-        return <div className="waiting"> 
-                <div className="ui active centered inline loader loader "></div>
-               </div>
-      }else{ 
+      console.log(Content) 
             console.log('3')
             return(
         Content.map(file =>{
         return(
-            <Card color='yellow'key={file.PK_idReservation} >
+            <Card color='yellow' key={file.PK_idReservation} >
                 <Card.Content>
                 <Card.Header>{file.firstname+" "+file.secondname+" "+file.firstLastname+" "+file.secondLastname || "Responsable"}</Card.Header><br></br>  
                     <div className="rowres d-flex flex-column">
@@ -55,10 +59,7 @@ class ResList extends Component {
                     </div>
                     <Card.Content extra>
                     <div className='ui two buttons align-bottom'>
-                    <Button basic color='black'>
-                        Detalle
-                    </Button>
-                    <Button basic color='black' onClick={this.open}>
+                    <Button basic color='black' onClick={() => this.open(file.PK_idReservation)}>
                         Eliminar
                     </Button>
                       <Modal className="confirm" open={this.state.open} onClose={this.close} >
@@ -73,8 +74,15 @@ class ResList extends Component {
                             icon='checkmark'
                             labelPosition='right'
                             content='Eliminar'
-                            onClick={() => this.handleDeleteReservation(file.PK_idReservation)} 
-                          />
+                            onClick={this.handleDeleteReservation} 
+                          />                            
+                          <ToastsContainer
+                            style='toast'
+                            store={ToastsStore} 
+                            position={ToastsContainerPosition.TOP_RIGHT}
+                            preventDuplicates={true}  
+                            iconClassNames={"toast-success"}                         
+                            />
                         </Modal.Actions>
                       </Modal>                                    
                     </div>
@@ -82,5 +90,5 @@ class ResList extends Component {
                 </Card.Content>
             </Card>
         )}))}
-    }}
+    }
 export default ResList;
