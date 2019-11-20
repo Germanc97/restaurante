@@ -20,7 +20,9 @@ class InformacionForm extends Component {
     email: "",
     address: "",
     schedule: "",
-    open: false
+    open: false,
+    id:"",
+    idUser:""
   }
 
   open = () => this.setState({open: true})
@@ -122,6 +124,13 @@ class InformacionForm extends Component {
           window.location.reload();  
       }, 1000);
   }
+  componentDidMount(){
+    let url = window.location.href;
+    let urlSplit = url.split("?")
+    const id = urlSplit[1].split("=")[1];
+    const idUser = urlSplit[2].split("=")[1];
+    this.setState({id:id,idUser:idUser})
+  }
   
 render(){
     const {Content} = this.props
@@ -199,6 +208,7 @@ render(){
                         </div>
                     </div>
                     <div className="form-row justify-content-end align-items-end">                              
+                    <button className="ui inverted secondary button" href={'http://181.50.100.167:7001/admin/'+this.state.id+'-'+this.state.idUser}>Modificar Menú</button> 
                     <button className="ui inverted secondary button" onClick={this.handleClose}>Cancelar</button> 
                     <button className="ui inverted secondary button" onClick={this.open}>Aceptar</button>                  
                     </div>                  

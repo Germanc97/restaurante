@@ -129,8 +129,7 @@ class App extends Component {
       return( 
       <div className="loaderhref">
         <div class="ui active loader"></div> 
-      </div>
-      
+      </div>      
       )
     }
   }
