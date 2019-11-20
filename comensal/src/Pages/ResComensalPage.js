@@ -62,7 +62,7 @@ export default class Restaurant extends Component{
         </div>
         </div>
         </Col>
-        <Col md={3}>
+        <Col lg={3}>
         <Segment className="Data">
         <CommentGrid/>
         </Segment>

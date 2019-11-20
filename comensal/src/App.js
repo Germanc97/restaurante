@@ -137,7 +137,7 @@ class App extends Component {
             <div className="App-header">
               <br/>
               <div className="ui active centered inline big loader"></div>
-              </div>
+            </div>
             <div className="decorBar"></div>
           </div>
       );   

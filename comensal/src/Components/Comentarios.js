@@ -11,8 +11,18 @@ class CommentGrid extends Component{
       Text: "",
       idRes: null,
       UserId: null,
+      Validate:{
+        content: ''
+      }
     }
   }
+  _fetchValidate(User){
+    fetch('http://181.50.100.167:4000/validateSession?id='+User)
+    .then(res => res.json())
+    .then((jsonData) => {
+      this.setState({Validate : jsonData});
+    })    
+    }
   _fetchMovie(id){
   fetch('http://181.50.100.167:5000/GetReviewsXRestaurant/'+id)
   .then(res => res.json())
@@ -50,6 +60,10 @@ class CommentGrid extends Component{
     console.log(urlSplit)
     if(urlSplit.length > 2){
       var User = urlSplit[2].split("=")[1];
+      this._fetchValidate(User)
+      if(this.state.Validate.content!=="user is authenticate!!!"){
+        var User=null
+      }
     }
     var Autor = User
     var Restaurant = this.state.idRes
@@ -72,13 +86,13 @@ class CommentGrid extends Component{
       body : JSON.stringify(params)
     }
     console.log(params)
-    if(Restaurant && Autor && (valueStar||Comentario)){
+    if(Restaurant && (valueStar||Comentario)){
       fetch('http://181.50.100.167:5000/postReview',request)
         .then(response =>  {
             console.log(response)
             if (response.status === 200) {
                 console.log("se escribió con exito")
-                //window.location.reload();
+                window.location.reload();
             };
         })
         .catch(err => console.log("Se presentó un error"));
