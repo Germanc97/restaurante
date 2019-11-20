@@ -16,8 +16,8 @@ class InformacionForm extends Component {
       <div key={User._id}>
       <div className="Information-Container">
       <div className="Column-Information">
-                            <label className="font-weight-bold" style={{fontSize: '22px', color:"rgba(241, 185, 17, 0.746)"}}>
-                            Encuentranos Aqui!!!
+                            <label className="font-weight-bold" style={{fontSize: '22px', color:"#EFB810"}}>
+                            Encuentranos Aqui!!
                             </label>                 
                             <label className="font-weight-bold"  style={{fontSize: '18px'}}>
                             Dirección:

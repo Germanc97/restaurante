@@ -49,13 +49,15 @@ import Carousel from 'react-bootstrap/Carousel'
       ))}        
       </Carousel>
      )
-    }else if(this.state.result[0]===0){
+    }else{
       return(
         <Carousel className="gridList">        
           <Carousel.Item>
-            <div className="LoaderGalery">
-            <div className="ui active centered big loader"></div>
-            </div>
+          <img
+            className="d-block w-100 img-thumbnail Size"
+            src={Noimg}
+            alt="Error!! Imagen no cargada"
+          />
             </Carousel.Item>                 
         </Carousel>
         )
