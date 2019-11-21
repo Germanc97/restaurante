@@ -41,8 +41,14 @@ class ResList extends Component {
       }
 
       render(){
-      const {Content} = this.props
-      console.log(Content) 
+        const {Content} = this.props
+        if (Content[0]=== 1){
+          console.log('ENTRA')       
+          return (<div className="waiting"> 
+                  <div className="ui active centered inline loader loader "></div>
+                 </div>)
+        }else{
+        console.log(Content) 
             console.log('3')
             return(
         Content.map(file =>{
@@ -89,6 +95,6 @@ class ResList extends Component {
                     </Card.Content>
                 </Card.Content>
             </Card>
-        )}))}
+        )}))}}
     }
 export default ResList;
